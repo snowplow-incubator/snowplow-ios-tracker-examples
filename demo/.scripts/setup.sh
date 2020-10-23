@@ -17,7 +17,7 @@ BUILD_PROJECT_SWIFT_DEMO="-project SnowplowSwiftDemo.xcodeproj"
 BUILD_SCHEME_SWIFT_DEMO_IOS="-scheme SnowplowSwiftDemo"
 BUILD_SCHEME_SWIFT_DEMO_WATCH="-scheme SnowplowSwiftWatch"
 
-BUILD_PROJECT_SWIFT_SPM_DEMO="-project SnowplowSwiftSPMDemo.xcodeproj"
+BUILD_WORKSPACE_SWIFT_SPM_DEMO="-workspace SnowplowSwiftSPMDemo.xcworkspace"
 BUILD_SCHEME_SWIFT_SPM_DEMO_IOS="-scheme SnowplowSwiftSPMDemo"
 
 #if [ "$CI" = true ]; then
