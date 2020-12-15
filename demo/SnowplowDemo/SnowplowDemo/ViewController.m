@@ -62,7 +62,7 @@
 }
 
 - (void) setup {
-    _tracker = [self getTrackerWithUrl:@"http://acme.fake.com" method:SPRequestPost];
+    _tracker = [self getTrackerWithUrl:@"http://acme.fake.com" method:SPRequestOptionsPost];
     _updateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateMetrics) userInfo:nil repeats:YES];
     _urlTextField.delegate = self;
     [_trackingOnOff addTarget:self
@@ -123,11 +123,11 @@
 }
 
 - (enum SPRequestOptions) getMethodType {
-    return _methodType.selectedSegmentIndex == 0 ? SPRequestGet : SPRequestPost;
+    return _methodType.selectedSegmentIndex == 0 ? SPRequestOptionsGet : SPRequestOptionsPost;
 }
 
 - (enum SPProtocol) getProtocolType {
-    return _protocolType.selectedSegmentIndex == 0 ? SPHttp : SPHttps;
+    return _protocolType.selectedSegmentIndex == 0 ? SPProtocolHttp : SPProtocolHttps;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {

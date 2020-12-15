@@ -37,7 +37,7 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
     @IBOutlet weak var protocolSwitch: UISegmentedControl!
     @IBOutlet weak var methodSwitch: UISegmentedControl!
-    weak var tracker : SPTracker?
+    weak var tracker : Tracker?
 
     var parentPageViewController: PageViewController!
     @objc dynamic var snowplowId: String! = "demo view"
@@ -85,7 +85,7 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     
     @IBAction func toggleProtocol(_ sender: UISegmentedControl) {
         self.parentPageViewController.protocolType = (protocolSwitch.selectedSegmentIndex == 0) ?
-            .http: .https
+            ProtocolOptions.http: .https
     }
     
     @IBAction func trackEvents(_ sender: UIButton) {

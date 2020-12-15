@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let userInfo = requestContent.userInfo
                 let sound = userInfo["sound"] as? String ?? "unknown"
 
-                let content = SPNotificationContent.build({(builder : SPNotificationContentBuilder?) -> Void in
+                let content = NotificationContent.build({(builder : NotificationContentBuilder?) -> Void in
                     builder!.setTitle(requestContent.title)
                     builder!.setSubtitle(requestContent.subtitle)
                     builder!.setBody(requestContent.body)
@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 formatter.locale = Locale(identifier: "en_US")
                 let dateString = formatter.string(from: response.notification.date)
                 
-                let event = SPPushNotification.build({(builder : SPPushNotificationBuilder?) -> Void in
+                let event = PushNotification.build({(builder : PushNotificationBuilder?) -> Void in
                     builder!.setAction(actionIdentifier)
                     builder!.setTrigger(SPUtilities.getTriggerType(request.trigger))
                     builder!.setDeliveryDate(dateString)

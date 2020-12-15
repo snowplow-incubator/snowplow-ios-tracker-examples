@@ -17,7 +17,7 @@
 		CEF26A0D243CC5630051C2EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF26A00243CC5630051C2EB /* Assets.xcassets */; };
 		CEF26A0F243CC5630051C2EB /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF26A02243CC5630051C2EB /* MetricsViewController.swift */; };
 		CEF26A11243CC5630051C2EB /* AdditionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF26A05243CC5630051C2EB /* AdditionalViewController.swift */; };
-		EDD53F61254069FA0000E57D /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = EDD53F60254069FA0000E57D /* Dependencies */; };
+		EDA4C391255EBD4C00CD9BCC /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = EDA4C390255EBD4C00CD9BCC /* Dependencies */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDD53F61254069FA0000E57D /* Dependencies in Frameworks */,
+				EDA4C391255EBD4C00CD9BCC /* Dependencies in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 			);
 			name = SnowplowSwiftSPMDemo;
 			packageProductDependencies = (
-				EDD53F60254069FA0000E57D /* Dependencies */,
+				EDA4C390255EBD4C00CD9BCC /* Dependencies */,
 			);
 			productName = SnowplowSwiftSPMDemo;
 			productReference = CEF269DD243CC5440051C2EB /* SnowplowSwiftSPMDemo.app */;
@@ -394,7 +394,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EDD53F60254069FA0000E57D /* Dependencies */ = {
+		EDA4C390255EBD4C00CD9BCC /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Dependencies;
 		};

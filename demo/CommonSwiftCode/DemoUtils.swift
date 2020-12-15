@@ -24,7 +24,7 @@ import Foundation
 import SnowplowTracker
 
 class DemoUtils {
-    static func trackAll(_ tracker: SPTracker) {
+    static func trackAll(_ tracker: Tracker) {
         self.trackPageViewWithTracker(tracker)
         self.trackScreenViewWithTracker(tracker)
         self.trackStructuredEventWithTracker(tracker)
@@ -34,8 +34,8 @@ class DemoUtils {
         self.trackPushNotificationWithTracker(tracker)
     }
     
-    static func trackStructuredEventWithTracker(_ tracker: SPTracker) {
-        let event = SPStructured.build({ (builder : SPStructuredBuilder?) -> Void in
+    static func trackStructuredEventWithTracker(_ tracker: Tracker) {
+        let event = Structured.build({ (builder : StructuredBuilder?) -> Void in
             builder!.setCategory("DemoCategory")
             builder!.setAction("DemoAction")
             builder!.setLabel("DemoLabel")
@@ -45,8 +45,8 @@ class DemoUtils {
         tracker.track(event)
     }
     
-    static func trackUnstructuredEventWithTracker(_ tracker: SPTracker) {
-        var event = SPStructured.build({ (builder : SPStructuredBuilder?) -> Void in
+    static func trackUnstructuredEventWithTracker(_ tracker: Tracker) {
+        var event = Structured.build({ (builder : StructuredBuilder?) -> Void in
             builder!.setCategory("DemoCategory")
             builder!.setAction("DemoAction")
             builder!.setLabel("DemoLabel")
@@ -55,7 +55,7 @@ class DemoUtils {
         })
         tracker.track(event)
         
-        event = SPStructured.build({ (builder : SPStructuredBuilder?) -> Void in
+        event = Structured.build({ (builder : StructuredBuilder?) -> Void in
             builder!.setCategory("DemoCategory")
             builder!.setAction("DemoAction")
             builder!.setLabel("DemoLabel")
@@ -66,31 +66,31 @@ class DemoUtils {
         tracker.track(event)
     }
     
-    static func trackPageViewWithTracker(_ tracker: SPTracker) {
+    static func trackPageViewWithTracker(_ tracker: Tracker) {
         let data: NSDictionary = [ "targetUrl": "http://a-target-url.com"]
-        let sdj = SPSelfDescribingJson(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", andData: data)!
+        let sdj = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", andData: data)!
 
-        var event = SPUnstructured.build({ (builder : SPUnstructuredBuilder?) -> Void in
+        var event = Unstructured.build({ (builder : UnstructuredBuilder?) -> Void in
             builder!.setEventData(sdj)
         })
         tracker.track(event)
         
-        event = SPUnstructured.build({ (builder : SPUnstructuredBuilder?) -> Void in
+        event = Unstructured.build({ (builder : UnstructuredBuilder?) -> Void in
             builder!.setEventData(sdj)
             builder!.setTimestamp(1243567890)
         })
         tracker.track(event)
     }
     
-    static func trackScreenViewWithTracker(_ tracker: SPTracker) {
+    static func trackScreenViewWithTracker(_ tracker: Tracker) {
         let screenId = UUID().uuidString
-        var event = SPScreenView.build({ (builder : SPScreenViewBuilder?) -> Void in
+        var event = ScreenView.build({ (builder : ScreenViewBuilder?) -> Void in
             builder!.setName("DemoScreenName")
             builder!.setScreenId(screenId)
         })
         tracker.track(event)
         
-        event = SPScreenView.build({ (builder : SPScreenViewBuilder?) -> Void in
+        event = ScreenView.build({ (builder : ScreenViewBuilder?) -> Void in
             builder!.setName("DemoScreenName")
             builder!.setScreenId(screenId)
             builder!.setTimestamp(1243567890)
@@ -98,8 +98,8 @@ class DemoUtils {
         tracker.track(event)
     }
     
-    static func trackTimingWithCategoryWithTracker(_ tracker: SPTracker) {
-        var event = SPTiming.build({ (builder : SPTimingBuilder?) -> Void in
+    static func trackTimingWithCategoryWithTracker(_ tracker: Tracker) {
+        var event = Timing.build({ (builder : TimingBuilder?) -> Void in
             builder!.setCategory("DemoTimingCategory")
             builder!.setVariable("DemoTimingVariable")
             builder!.setTiming(5)
@@ -107,7 +107,7 @@ class DemoUtils {
         })
         tracker.track(event)
         
-        event = SPTiming.build({ (builder : SPTimingBuilder?) -> Void in
+        event = Timing.build({ (builder : TimingBuilder?) -> Void in
             builder!.setCategory("DemoTimingCategory")
             builder!.setVariable("DemoTimingVariable")
             builder!.setTiming(5)
@@ -117,9 +117,9 @@ class DemoUtils {
         tracker.track(event)
     }
     
-    static func trackEcommerceTransactionWithTracker(_ tracker: SPTracker) {
+    static func trackEcommerceTransactionWithTracker(_ tracker: Tracker) {
         let transactionID = "6a8078be"
-        let itemArray : [Any] = [ SPEcommerceItem.build({ (builder : SPEcommTransactionItemBuilder?) -> Void in
+        let itemArray : [Any] = [ EcommerceItem.build({ (builder : EcommTransactionItemBuilder?) -> Void in
             builder!.setItemId(transactionID)
             builder!.setSku("DemoItemSku")
             builder!.setName("DemoItemName")
@@ -129,7 +129,7 @@ class DemoUtils {
             builder!.setCurrency("USD")
         }) ]
         
-        var event = SPEcommerce.build({ (builder : SPEcommTransactionBuilder?) -> Void in
+        var event = Ecommerce.build({ (builder : EcommTransactionBuilder?) -> Void in
             builder!.setOrderId(transactionID)
             builder!.setTotalValue(350)
             builder!.setAffiliation("DemoTransactionAffiliation")
@@ -143,7 +143,7 @@ class DemoUtils {
         })
         tracker.track(event)
         
-        event = SPEcommerce.build({ (builder : SPEcommTransactionBuilder?) -> Void in
+        event = Ecommerce.build({ (builder : EcommTransactionBuilder?) -> Void in
             builder!.setOrderId(transactionID)
             builder!.setTotalValue(350)
             builder!.setAffiliation("DemoTransactionAffiliation")
@@ -159,7 +159,7 @@ class DemoUtils {
         tracker.track(event)
     }
 
-    static func trackPushNotificationWithTracker(_ tracker: SPTracker) {
+    static func trackPushNotificationWithTracker(_ tracker: Tracker) {
         let attachments = [["identifier": "testidentifier",
                             "url": "testurl",
                             "type": "testtype"]]
@@ -167,7 +167,7 @@ class DemoUtils {
         var userInfo = Dictionary<String, Any>()
         userInfo["test"] = "test"
 
-        let content = SPNotificationContent.build({(builder : SPNotificationContentBuilder?) -> Void in
+        let content = NotificationContent.build({(builder : NotificationContentBuilder?) -> Void in
             builder!.setTitle("title")
             builder!.setSubtitle("subtitle")
             builder!.setBody("body")
@@ -178,7 +178,7 @@ class DemoUtils {
             builder!.setAttachments(attachments)
         })
 
-        let event = SPPushNotification.build({(builder : SPPushNotificationBuilder?) -> Void in
+        let event = PushNotification.build({(builder : PushNotificationBuilder?) -> Void in
             builder!.setTrigger("PUSH") // can be "PUSH", "LOCATION", "CALENDAR", or "TIME_INTERVAL"
             builder!.setAction("action")
             builder!.setDeliveryDate("date")
