@@ -29,36 +29,29 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     let kAppId     = "DemoAppId"
     let kNamespace = "DemoAppNamespace"
     
-    func getTracker(_ url: String, method: RequestOptions, protocol _protocol: ProtocolOptions) -> Tracker {
-        let emitter = Emitter.build({ (builder : EmitterBuilder?) -> Void in
-            builder!.setUrlEndpoint(url)
-            builder!.setHttpMethod(method)
-            builder!.setProtocol(_protocol)
-            builder!.setCallback(self)
-            builder!.setEmitRange(500)
-            builder!.setEmitThreadPoolSize(20)
-            builder!.setByteLimitPost(52000)
-        })!
-        let subject = Subject(platformContext: true, andGeoContext: false)!
-        let newTracker = Tracker.build({ (builder : TrackerBuilder?) -> Void in
-            builder!.setEmitter(emitter)
-            builder!.setAppId(self.kAppId)
-            builder!.setTrackerNamespace(self.kNamespace)
-            builder!.setBase64Encoded(false)
-            builder!.setSessionContext(true)
-            builder!.setSubject(subject)
-            builder!.setLifecycleEvents(true)
-            builder!.setAutotrackScreenViews(true)
-            builder!.setScreenContext(true)
-            builder!.setApplicationContext(true)
-            builder!.setExceptionEvents(true)
-            builder!.setInstallEvent(true)
-            builder!.setGdprContextWith(GDPRProcessingBasis.consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-        })
-        return newTracker
+    func getTracker(_ url: String, method: RequestOptions, protocol _protocol: ProtocolOptions) -> TrackerControlling {
+        let networkConfig = NetworkConfiguration(endpoint: url, protocol: _protocol, method: method)
+        let emitterConfig = EmitterConfiguration()
+            .byteLimitPost(52000)
+            .emitThreadPoolSize(20)
+            .emitRange(500)
+            .requestCallback(self)
+        let trackerConfig = TrackerConfiguration(namespace: kNamespace, appId: kAppId)
+            .base64Encoding(false)
+            .sessionContext(true)
+            .platformContext(true)
+            .geoLocationContext(false)
+            .lifecycleAutotracking(true)
+            .screenViewAutotracking(true)
+            .screenContext(true)
+            .applicationContext(true)
+            .exceptionAutotracking(true)
+            .installAutotracking(true)
+        let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
+        return Tracker.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig]);
     }
     
-    var tracker : Tracker!
+    var tracker : TrackerControlling!
     
     
     override func awake(withContext context: Any?) {

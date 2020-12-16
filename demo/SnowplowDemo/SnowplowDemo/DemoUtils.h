@@ -31,42 +31,6 @@
  * Tracks all types of events with a Tracker
  * @param tracker_ The tracker to use for the Tracking
  */
-+ (void) trackAll:(SPTracker *)tracker_;
-
-/**
- * Tracks 4 Structured Events
- * @param tracker_ The tracker to use for the Tracking
- */
-+ (void) trackStructuredEventWithTracker:(SPTracker *)tracker_;
-
-/**
- * Tracks 4 Unstructured Events
- * @param tracker_ The tracker to use for the Tracking
- */
-+ (void) trackUnstructuredEventWithTracker:(SPTracker *)tracker_;
-
-/**
- * Tracks 4 Page View Events
- * @param tracker_ The tracker to use for the Tracking
- */
-+ (void) trackPageViewWithTracker:(SPTracker *)tracker_;
-
-/**
- * Tracks 4 Screen View Events
- * @param tracker_ The tracker to use for the Tracking
- */
-+ (void) trackScreenViewWithTracker:(SPTracker *)tracker_;
-
-/**
- * Tracks 4 Timing With Category Events
- * @param tracker_ The tracker to use for the Tracking
- */
-+ (void) trackTimingWithCategoryWithTracker:(SPTracker *)tracker_;
-
-/**
- * Tracks 4 Ecommerce Transactions with 1 item each (8 events)
- * @param tracker_ The tracker to use for the Tracking
- */
-+ (void) trackEcommerceTransactionWithTracker:(SPTracker *)tracker_;
++ (int)trackAll:(SPTracker *)tracker_;
 
 @end

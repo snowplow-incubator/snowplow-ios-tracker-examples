@@ -25,7 +25,7 @@ import SnowplowTracker
 
 class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, RequestCallback {
 
-    var tracker : Tracker!
+    var tracker : TrackerControlling!
     var madeCounter : Int = 0
     var sentCounter : Int = 0
     var uri : String = ""
@@ -39,7 +39,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
     // Tracker setup and init
 
-    func getTracker(_ url: String, method: RequestOptions) -> Tracker {
+    func getTracker(_ url: String, method: RequestOptions) -> TrackerControlling {
         let eventStore = SQLiteEventStore();
         let network = DefaultNetworkConnection.build { (builder) in
             builder.setUrlEndpoint(url)
@@ -47,38 +47,32 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             builder.setEmitThreadPoolSize(20)
             builder.setByteLimitPost(52000)
         }
-        let emitter = Emitter.build({ (builder : EmitterBuilder?) -> Void in
-            builder!.setCallback(self)
-            builder!.setEmitRange(500)
-            builder!.setEventStore(eventStore)
-            builder!.setNetworkConnection(network)
-        })!
-        let subject = Subject(platformContext: true, andGeoContext: false)!
-        let newTracker = Tracker.build({ (builder : TrackerBuilder?) -> Void in
-            builder!.setEmitter(emitter)
-            builder!.setAppId(self.kAppId)
-            builder!.setTrackerNamespace(self.kNamespace)
-            builder!.setBase64Encoded(false)
-            builder!.setSessionContext(true)
-            builder!.setSubject(subject)
-            builder!.setLifecycleEvents(true)
-            builder!.setAutotrackScreenViews(true)
-            builder!.setScreenContext(true)
-            builder!.setApplicationContext(true)
-            builder!.setExceptionEvents(true)
-            builder!.setInstallEvent(true)
-            // set global context generators
-            builder!.setGlobalContextGenerators([
-                "ruleSetExampleTag": self.ruleSetGlobalContextExample(),
-                "staticExampleTag": self.staticGlobalContextExample(),
-            ])
-            builder!.setGdprContextWith(GDPRProcessingBasis.consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-            // set diagnostic and logger delegate
-            builder?.setTrackerDiagnostic(true)
-            builder?.setLogLevel(.verbose)
-            builder?.setLoggerDelegate(self)
-        })
-        return newTracker
+        let networkConfig = NetworkConfiguration(endpoint: url, protocol: .https, method: method)
+        let trackerConfig = TrackerConfiguration(namespace: kNamespace, appId: kAppId)
+            .base64Encoding(false)
+            .sessionContext(true)
+            .platformContext(true)
+            .geoLocationContext(false)
+            .lifecycleAutotracking(true)
+            .screenViewAutotracking(true)
+            .screenContext(true)
+            .applicationContext(true)
+            .exceptionAutotracking(true)
+            .installAutotracking(true)
+            .diagnosticAutotracking(true)
+            .logLevel(.verbose)
+            .loggerDelegate(self)
+        let emitterConfig = EmitterConfiguration()
+            .networkConnection(network)
+            .eventStore(eventStore)
+            .emitRange(500)
+            .requestCallback(self)
+        let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
+        let gcConfig = GlobalContextsConfiguration()
+        gcConfig.add(tag: "ruleSetExampleTag", contextGenerator: ruleSetGlobalContextExample())
+        gcConfig.add(tag: "staticExampleTag", contextGenerator: staticGlobalContextExample())
+        
+        return Tracker.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig, gcConfig]);
     }
     
     func ruleSetGlobalContextExample() -> GlobalContext {
@@ -210,15 +204,15 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 }
 
 extension PageViewController: LoggerDelegate {
-    func error(_ tag: String!, message: String!) {
-        print("[Error] \(tag!): \(message!)")
+    func error(_ tag: String, message: String) {
+        print("[Error] \(tag): \(message)")
     }
     
-    func debug(_ tag: String!, message: String!) {
-        print("[Debug] \(tag!): \(message!)")
+    func debug(_ tag: String, message: String) {
+        print("[Debug] \(tag): \(message)")
     }
     
-    func verbose(_ tag: String!, message: String!) {
-        print("[Verbose] \(tag!): \(message!)")
+    func verbose(_ tag: String, message: String) {
+        print("[Verbose] \(tag): \(message)")
     }
 }

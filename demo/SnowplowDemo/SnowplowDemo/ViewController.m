@@ -92,11 +92,8 @@
         [self->_tracker.emitter setHttpMethod:methodType];
         [self->_tracker.emitter setProtocol:protocolType];
         
-        // Itterate the made counter
-        self->_madeCounter += 15;
-        
-        // Track all types of events!
-        [DemoUtils trackAll:self->_tracker];
+        // Track all types of events and update count of total number of tracked events
+        self->_madeCounter += [DemoUtils trackAll:self->_tracker];
     });
 }
 

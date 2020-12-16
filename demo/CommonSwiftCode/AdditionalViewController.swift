@@ -27,7 +27,7 @@ import SnowplowTracker
 class AdditionalViewController: UIViewController, UITextFieldDelegate, PageObserver {
     
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
-    weak var tracker : Tracker?
+    weak var tracker : TrackerControlling?
     
     @objc dynamic var snowplowId: String! = "additional view"
     
