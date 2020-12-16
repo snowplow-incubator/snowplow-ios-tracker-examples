@@ -97,15 +97,12 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
             }
             
             // Update the tracker
-            self.tracker?.network.endpoint = url
-            self.tracker?.network.method = self.parentPageViewController.getMethodType()
-            self.tracker?.network.protocol = self.parentPageViewController.getProtocolType()
+            self.tracker?.network?.endpoint = url
+            self.tracker?.network?.method = self.parentPageViewController.getMethodType()
+            self.tracker?.network?.protocol = self.parentPageViewController.getProtocolType()
             
-            // Iterate the made counter
-            self.parentPageViewController.madeCounter += 14;
-            
-            // Track all types of events
-            DemoUtils.trackAll(self.parentPageViewController.tracker)
+            // Track all types of events and increase number of tracked events
+            self.parentPageViewController.madeCounter += DemoUtils.trackAll(self.parentPageViewController.tracker)
         }
     }
 }

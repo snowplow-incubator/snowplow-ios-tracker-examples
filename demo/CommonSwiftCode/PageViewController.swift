@@ -47,7 +47,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             builder.setEmitThreadPoolSize(20)
             builder.setByteLimitPost(52000)
         }
-        let networkConfig = NetworkConfiguration(endpoint: url, protocol: .https, method: method)
+        let networkConfig = NetworkConfiguration(networkConnection: network)
         let trackerConfig = TrackerConfiguration(namespace: kNamespace, appId: kAppId)
             .base64Encoding(false)
             .sessionContext(true)
@@ -63,7 +63,6 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             .logLevel(.verbose)
             .loggerDelegate(self)
         let emitterConfig = EmitterConfiguration()
-            .networkConnection(network)
             .eventStore(eventStore)
             .emitRange(500)
             .requestCallback(self)

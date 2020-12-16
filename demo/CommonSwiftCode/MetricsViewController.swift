@@ -60,9 +60,9 @@ class MetricsViewController: UIViewController, UITextFieldDelegate, PageObserver
     
     @objc func updateMetrics() {
         madeLabel.text = String(format: "Made: %lld", parentPageViewController.madeCounter)
-        dbCountLabel.text = String(format: "DB Count: %lu", CUnsignedLong(self.tracker?.emitter.getDbCount() ?? 0))
+        dbCountLabel.text = String(format: "DB Count: %lu", CUnsignedLong(self.tracker?.emitter.dbCount ?? 0))
         sessionCountLabel.text = String(format: "Session Count: %lu", CUnsignedLong(self.tracker?.session?.sessionIndex ?? 0))
-        isRunningLabel.text = String(format: "Running: %@", self.tracker?.emitter.getSendingStatus() ?? false ? "yes" : "no")
+        isRunningLabel.text = String(format: "Running: %@", self.tracker?.emitter.isSending ?? false ? "yes" : "no")
         isBackgroundLabel.text = String(format: "Background: %@", self.tracker?.session?.isInBackground ?? false ? "yes" : "no")
         sentLabel.text = String(format: "Sent: %lu", CUnsignedLong(parentPageViewController.sentCounter))
     }
