@@ -37,7 +37,7 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
     @IBOutlet weak var protocolSwitch: UISegmentedControl!
     @IBOutlet weak var methodSwitch: UISegmentedControl!
-    weak var tracker : TrackerControlling?
+    weak var tracker : TrackerController?
 
     var parentPageViewController: PageViewController!
     @objc dynamic var snowplowId: String! = "demo view"

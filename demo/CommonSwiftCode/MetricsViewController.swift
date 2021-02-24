@@ -38,7 +38,7 @@ class MetricsViewController: UIViewController, UITextFieldDelegate, PageObserver
     @IBOutlet weak var sentLabel: UILabel!
     @IBOutlet weak var tokenLabel: UILabel!
     var updateTimer : Timer?
-    weak var tracker : TrackerControlling?
+    weak var tracker : TrackerController?
 
     @objc dynamic var snowplowId: String! = "metrics view"
 

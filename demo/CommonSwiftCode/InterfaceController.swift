@@ -29,11 +29,11 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     let kAppId     = "DemoAppId"
     let kNamespace = "DemoAppNamespace"
     
-    func getTracker(_ url: String, method: RequestOptions, protocol _protocol: ProtocolOptions) -> TrackerControlling {
+    func getTracker(_ url: String, method: RequestOptions, protocol _protocol: ProtocolOptions) -> TrackerController {
         let networkConfig = NetworkConfiguration(endpoint: url, protocol: _protocol, method: method)
         let emitterConfig = EmitterConfiguration()
             .byteLimitPost(52000)
-            .emitThreadPoolSize(20)
+            .threadPoolSize(20)
             .emitRange(500)
             .requestCallback(self)
         let trackerConfig = TrackerConfiguration(namespace: kNamespace, appId: kAppId)
@@ -51,7 +51,7 @@ class InterfaceController: WKInterfaceController, RequestCallback {
         return Tracker.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig]);
     }
     
-    var tracker : TrackerControlling!
+    var tracker : TrackerController!
     
     
     override func awake(withContext context: Any?) {

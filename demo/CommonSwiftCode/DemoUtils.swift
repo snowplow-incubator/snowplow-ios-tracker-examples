@@ -24,16 +24,16 @@ import Foundation
 import SnowplowTracker
 
 class DemoUtils {
-    static func trackAll(_ tracker: TrackerControlling) -> Int {
+    static func trackAll(_ tracker: TrackerController) -> Int {
         return self.trackStructuredEventWithTracker(tracker)
-        + self.trackUnstructuredEventWithTracker(tracker)
+        + self.trackSelfDescribingEventWithTracker(tracker)
         + self.trackScreenViewWithTracker(tracker)
         + self.trackTimingWithCategoryWithTracker(tracker)
         + self.trackEcommerceTransactionWithTracker(tracker)
         + self.trackPushNotificationWithTracker(tracker)
     }
     
-    static func trackStructuredEventWithTracker(_ tracker: TrackerControlling) -> Int {
+    static func trackStructuredEventWithTracker(_ tracker: TrackerController) -> Int {
         let event = Structured(category: "DemoCategory", action: "DemoAction")
             .label("DemoLabel")
             .property("DemoProperty")
@@ -42,32 +42,31 @@ class DemoUtils {
         return 1
     }
     
-    static func trackUnstructuredEventWithTracker(_ tracker: TrackerControlling) -> Int {
-        let data = ["targetUrl": "http://a-target-url.com"];
-        let sdj = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", andData: data as NSObject)!
-        let event = Unstructured(eventData: sdj)
+    static func trackSelfDescribingEventWithTracker(_ tracker: TrackerController) -> Int {
+        let data = ["targetUrl": "http://a-target-url.com" as NSObject];
+        let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
         tracker.track(event)
         return 1
     }
     
-    static func trackScreenViewWithTracker(_ tracker: TrackerControlling) -> Int {
+    static func trackScreenViewWithTracker(_ tracker: TrackerController) -> Int {
         let event = ScreenView(name: "DemoScreenName", screenId: UUID())
         tracker.track(event)
         return 1
     }
     
-    static func trackTimingWithCategoryWithTracker(_ tracker: TrackerControlling) -> Int {
+    static func trackTimingWithCategoryWithTracker(_ tracker: TrackerController) -> Int {
         let event = Timing(category: "DemoTimingCategory", variable: "DemoTimingVariable", timing: 5)
             .label("DemoTimingLabel")
         tracker.track(event)
         return 1
     }
     
-    static func trackEcommerceTransactionWithTracker(_ tracker: TrackerControlling) -> Int {
+    static func trackEcommerceTransactionWithTracker(_ tracker: TrackerController) -> Int {
         let transactionID = "6a8078be"
         
         let itemArray = [
-            EcommerceItem(itemId: transactionID, sku: "DemoItemSku", price: 0.75, quantity: 1)
+            EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
                 .name("DemoItemName")
                 .category("DemoItemCategory")
                 .currency("USD")
@@ -86,7 +85,7 @@ class DemoUtils {
         return 2
     }
 
-    static func trackPushNotificationWithTracker(_ tracker: TrackerControlling) -> Int {
+    static func trackPushNotificationWithTracker(_ tracker: TrackerController) -> Int {
         let attachments = [["identifier": "testidentifier",
                             "url": "testurl",
                             "type": "testtype"]]

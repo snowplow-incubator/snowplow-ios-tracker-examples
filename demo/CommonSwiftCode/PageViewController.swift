@@ -25,7 +25,7 @@ import SnowplowTracker
 
 class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, RequestCallback {
 
-    var tracker : TrackerControlling!
+    var tracker : TrackerController!
     var madeCounter : Int = 0
     var sentCounter : Int = 0
     var uri : String = ""
@@ -39,7 +39,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
     // Tracker setup and init
 
-    func getTracker(_ url: String, method: RequestOptions) -> TrackerControlling {
+    func getTracker(_ url: String, method: RequestOptions) -> TrackerController {
         let eventStore = SQLiteEventStore();
         let network = DefaultNetworkConnection.build { (builder) in
             builder.setUrlEndpoint(url)
