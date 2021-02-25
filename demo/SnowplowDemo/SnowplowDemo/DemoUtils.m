@@ -53,7 +53,7 @@
     NSDictionary * data = @{@"targetUrl": @"http://a-target-url.com"};
     SPSelfDescribingJson * sdj = [[SPSelfDescribingJson alloc] initWithSchema:@"iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1"
                                                                     andData:data];
-    SPUnstructured *event = [[SPUnstructured alloc] initWithEventData:sdj];
+    SPSelfDescribing *event = [[SPSelfDescribing alloc] initWithEventData:sdj];
     [tracker_ track:event];
     return 1;
 }
@@ -85,7 +85,7 @@
     NSMutableArray *itemArray = [NSMutableArray array];
     
     [itemArray addObject:
-     [[[[[SPEcommerceItem alloc] initWithItemId:transactionID sku:@"DemoItemSku" price:@0.75F quantity:@1]
+     [[[[[SPEcommerceItem alloc] initWithSku:@"DemoItemSku" price:@0.75F quantity:@1]
         name:@"DemoItemName"]
        category:@"DemoItemCategory"]
       currency:@"USD"]
