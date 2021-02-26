@@ -70,7 +70,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         gcConfig.add(tag: "ruleSetExampleTag", contextGenerator: ruleSetGlobalContextExample())
         gcConfig.add(tag: "staticExampleTag", contextGenerator: staticGlobalContextExample())
         
-        return Tracker.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig, gcConfig]);
+        return Snowplow.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig, gcConfig]);
     }
     
     func ruleSetGlobalContextExample() -> GlobalContext {

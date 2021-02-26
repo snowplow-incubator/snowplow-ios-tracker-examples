@@ -48,7 +48,7 @@ class InterfaceController: WKInterfaceController, RequestCallback {
             .exceptionAutotracking(true)
             .installAutotracking(true)
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-        return Tracker.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig]);
+        return Snowplow.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig]);
     }
     
     var tracker : TrackerController!
