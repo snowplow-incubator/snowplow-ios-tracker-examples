@@ -29,8 +29,8 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     let kAppId     = "DemoAppId"
     let kNamespace = "DemoAppNamespace"
     
-    func getTracker(_ url: String, method: RequestOptions, protocol _protocol: ProtocolOptions) -> TrackerController {
-        let networkConfig = NetworkConfiguration(endpoint: url, protocol: _protocol, method: method)
+    func getTracker(_ url: String, method: RequestOptions) -> TrackerController {
+        let networkConfig = NetworkConfiguration(endpoint: url, method: method)
         let emitterConfig = EmitterConfiguration()
             .byteLimitPost(52000)
             .threadPoolSize(20)
@@ -56,7 +56,7 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        self.tracker = self.getTracker("acme.fake.com", method: .get, protocol: .http)
+        self.tracker = self.getTracker("http://acme.fake.com", method: .get)
         // Configure interface objects here.
     }
     

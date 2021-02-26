@@ -30,7 +30,6 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     var sentCounter : Int = 0
     var uri : String = ""
     var methodType : RequestOptions = .get
-    var protocolType : ProtocolOptions = .http
     var token : String = ""
     @objc dynamic var snowplowId: String! = "page view"
 
@@ -103,12 +102,8 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         return self.methodType
     }
 
-    func getProtocolType() -> ProtocolOptions {
-        return self.protocolType
-    }
-    
     func setup() {
-        self.tracker = self.getTracker("acme.fake.com", method: .post)
+        self.tracker = self.getTracker("http://acme.fake.com", method: .post)
     }
 
     func newVc(viewController: String) -> UIViewController {

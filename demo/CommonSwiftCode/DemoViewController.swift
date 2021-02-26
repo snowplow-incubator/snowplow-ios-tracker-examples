@@ -35,7 +35,6 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
 
     @IBOutlet weak var uriField: UITextField!
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
-    @IBOutlet weak var protocolSwitch: UISegmentedControl!
     @IBOutlet weak var methodSwitch: UISegmentedControl!
     weak var tracker : TrackerController?
 
@@ -83,11 +82,6 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
             .get : .post
     }
     
-    @IBAction func toggleProtocol(_ sender: UISegmentedControl) {
-        self.parentPageViewController.protocolType = (protocolSwitch.selectedSegmentIndex == 0) ?
-            ProtocolOptions.http: .https
-    }
-    
     @IBAction func trackEvents(_ sender: UIButton) {
         UserDefaults.standard.set(uriField.text ?? "", forKey: keyUriField);
         DispatchQueue.global(qos: .default).async {
@@ -99,7 +93,6 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
             // Update the tracker
             self.tracker?.network?.endpoint = url
             self.tracker?.network?.method = self.parentPageViewController.getMethodType()
-            self.tracker?.network?.protocol = self.parentPageViewController.getProtocolType()
             
             // Track all types of events and increase number of tracked events
             self.parentPageViewController.madeCounter += DemoUtils.trackAll(self.parentPageViewController.tracker)
