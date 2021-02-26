@@ -62,7 +62,7 @@
 }
 
 - (void) setup {
-    _tracker = [self getTrackerWithUrl:@"http://acme.fake.com" method:SPRequestOptionsPost];
+    _tracker = [self getTrackerWithUrl:@"http://acme.fake.com" method:SPHttpMethodPost];
     _updateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateMetrics) userInfo:nil repeats:YES];
     _urlTextField.delegate = self;
     [_trackingOnOff addTarget:self
@@ -72,7 +72,7 @@
 
 - (IBAction) trackEvents:(id)sender {
     NSString *url = [self getCollectorUrl];
-    SPRequestOptions methodType = [self getMethodType];
+    SPHttpMethod methodType = [self getMethodType];
     SPProtocol protocolType = [self getProtocolType];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([url isEqual: @""]) {
@@ -119,8 +119,8 @@
     return _urlTextField.text;
 }
 
-- (enum SPRequestOptions) getMethodType {
-    return _methodType.selectedSegmentIndex == 0 ? SPRequestOptionsGet : SPRequestOptionsPost;
+- (enum SPHttpMethod) getMethodType {
+    return _methodType.selectedSegmentIndex == 0 ? SPHttpMethodGet : SPHttpMethodPost;
 }
 
 - (enum SPProtocol) getProtocolType {
@@ -137,7 +137,7 @@ static NSString *const kNamespace = @"DemoAppNamespace";
 // Tracker Setup & Init
 
 - (SPTracker *) getTrackerWithUrl:(NSString *)url_
-                           method:(enum SPRequestOptions)method_ {
+                           method:(enum SPHttpMethod)method_ {
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:url_];
         [builder setHttpMethod:method_];

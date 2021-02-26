@@ -29,7 +29,7 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     let kAppId     = "DemoAppId"
     let kNamespace = "DemoAppNamespace"
     
-    func getTracker(_ url: String, method: RequestOptions) -> TrackerController {
+    func getTracker(_ url: String, method: HttpMethod) -> TrackerController {
         let networkConfig = NetworkConfiguration(endpoint: url, method: method)
         let emitterConfig = EmitterConfiguration()
             .byteLimitPost(52000)

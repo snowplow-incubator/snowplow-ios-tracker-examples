@@ -29,7 +29,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     var madeCounter : Int = 0
     var sentCounter : Int = 0
     var uri : String = ""
-    var methodType : RequestOptions = .get
+    var methodType : HttpMethod = .get
     var token : String = ""
     @objc dynamic var snowplowId: String! = "page view"
 
@@ -38,7 +38,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
     // Tracker setup and init
 
-    func getTracker(_ url: String, method: RequestOptions) -> TrackerController {
+    func getTracker(_ url: String, method: HttpMethod) -> TrackerController {
         let eventStore = SQLiteEventStore();
         let network = DefaultNetworkConnection.build { (builder) in
             builder.setUrlEndpoint(url)
@@ -98,7 +98,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         return self.uri
     }
 
-    func getMethodType() -> RequestOptions {
+    func getMethodType() -> HttpMethod {
         return self.methodType
     }
 
