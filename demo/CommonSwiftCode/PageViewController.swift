@@ -39,7 +39,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     // Tracker setup and init
 
     func getTracker(_ url: String, method: HttpMethodOptions) -> TrackerController {
-        let eventStore = SQLiteEventStore();
+        let eventStore = SQLiteEventStore(namespace: kNamespace);
         let network = DefaultNetworkConnection.build { (builder) in
             builder.setUrlEndpoint(url)
             builder.setHttpMethod(method)
@@ -47,7 +47,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             builder.setByteLimitPost(52000)
         }
         let networkConfig = NetworkConfiguration(networkConnection: network)
-        let trackerConfig = TrackerConfiguration(namespace: kNamespace, appId: kAppId)
+        let trackerConfig = TrackerConfiguration()
             .base64Encoding(false)
             .sessionContext(true)
             .platformContext(true)
@@ -70,7 +70,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         gcConfig.add(tag: "ruleSetExampleTag", contextGenerator: ruleSetGlobalContextExample())
         gcConfig.add(tag: "staticExampleTag", contextGenerator: staticGlobalContextExample())
         
-        return Snowplow.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig, gcConfig]);
+        return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig, gcConfig]);
     }
     
     func ruleSetGlobalContextExample() -> GlobalContext {
