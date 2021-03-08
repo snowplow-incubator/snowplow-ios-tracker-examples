@@ -36,7 +36,8 @@ class InterfaceController: WKInterfaceController, RequestCallback {
             .threadPoolSize(20)
             .emitRange(500)
             .requestCallback(self)
-        let trackerConfig = TrackerConfiguration(namespace: kNamespace, appId: kAppId)
+        let trackerConfig = TrackerConfiguration()
+            .appId(kAppId)
             .base64Encoding(false)
             .sessionContext(true)
             .platformContext(true)
@@ -48,7 +49,7 @@ class InterfaceController: WKInterfaceController, RequestCallback {
             .exceptionAutotracking(true)
             .installAutotracking(true)
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-        return Snowplow.setup(network: networkConfig, tracker: trackerConfig, configurations: [emitterConfig, gdprConfig]);
+        return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig]);
     }
     
     var tracker : TrackerController!
