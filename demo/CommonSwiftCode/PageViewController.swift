@@ -103,7 +103,9 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     }
 
     func setup() {
-        self.tracker = self.getTracker("http://acme.fake.com", method: .post)
+        if (!uri.isEmpty) {
+            self.tracker = self.getTracker(uri, method: methodType)
+        }
     }
 
     func newVc(viewController: String) -> UIViewController {

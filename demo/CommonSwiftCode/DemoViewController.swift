@@ -36,14 +36,15 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     @IBOutlet weak var uriField: UITextField!
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
     @IBOutlet weak var methodSwitch: UISegmentedControl!
-    weak var tracker : TrackerController?
+    var tracker : TrackerController? {
+        parentPageViewController.tracker
+    }
 
     var parentPageViewController: PageViewController!
     @objc dynamic var snowplowId: String! = "demo view"
 
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
-        tracker = parentRef.tracker
     }
 
     @objc func action() {
@@ -66,6 +67,7 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
         self.trackingSwitch.addTarget(self, action: #selector(action), for: .valueChanged)
         // Do any additional setup after loading the view, typically from a nib.
         uriField.text = UserDefaults.standard.string(forKey: keyUriField) ?? ""
+        inputUri(uriField)
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,17 +87,18 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     @IBAction func trackEvents(_ sender: UIButton) {
         UserDefaults.standard.set(uriField.text ?? "", forKey: keyUriField);
         DispatchQueue.global(qos: .default).async {
+            self.parentPageViewController.setup()
             let url = self.parentPageViewController.getCollectorUrl()
-            if url == "" {
+            guard !url.isEmpty, let tracker = self.tracker else {
                 return
             }
             
             // Update the tracker
-            self.tracker?.network?.endpoint = url
-            self.tracker?.network?.method = self.parentPageViewController.getMethodType()
+            tracker.network?.endpoint = url
+            tracker.network?.method = self.parentPageViewController.getMethodType()
             
             // Track all types of events and increase number of tracked events
-            self.parentPageViewController.madeCounter += DemoUtils.trackAll(self.parentPageViewController.tracker)
+            self.parentPageViewController.madeCounter += DemoUtils.trackAll(tracker)
         }
     }
 }
