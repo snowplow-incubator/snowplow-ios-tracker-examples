@@ -37,7 +37,8 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
     @IBOutlet weak var methodSwitch: UISegmentedControl!
     var tracker : TrackerController? {
-        parentPageViewController.tracker
+        let t: TrackerController? = parentPageViewController.tracker
+        return t
     }
 
     var parentPageViewController: PageViewController!
