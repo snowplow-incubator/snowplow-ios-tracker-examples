@@ -53,31 +53,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let userInfo = requestContent.userInfo
                 let sound = userInfo["sound"] as? String ?? "unknown"
 
-                let content = SPNotificationContent.build({(builder : SPNotificationContentBuilder?) -> Void in
-                    builder!.setTitle(requestContent.title)
-                    builder!.setSubtitle(requestContent.subtitle)
-                    builder!.setBody(requestContent.body)
-                    builder!.setBadge(requestContent.badge!)
-                    builder!.setSound(sound)
-                    builder!.setLaunchImageName(requestContent.launchImageName)
-                    builder!.setUserInfo(userInfo)
-                    builder!.setAttachments(SPUtilities.convert(request.content.attachments))
-                })
-
+                let content = NotificationContent(title: requestContent.title, body: requestContent.body, badge: requestContent.badge!)
+                    .subtitle(requestContent.subtitle)
+                    .sound(sound)
+                    .launchImageName(requestContent.launchImageName)
+                    .userInfo(userInfo)
+                    .attachments(SPUtilities.convert(request.content.attachments))
+                
                 let formatter = DateFormatter()
                 formatter.dateStyle = .medium
                 formatter.timeStyle = .medium
                 formatter.locale = Locale(identifier: "en_US")
                 let dateString = formatter.string(from: response.notification.date)
                 
-                let event = SPPushNotification.build({(builder : SPPushNotificationBuilder?) -> Void in
-                    builder!.setAction(actionIdentifier)
-                    builder!.setTrigger(SPUtilities.getTriggerType(request.trigger))
-                    builder!.setDeliveryDate(dateString)
-                    builder!.setCategoryIdentifier(requestContent.categoryIdentifier)
-                    builder!.setThreadIdentifier(requestContent.threadIdentifier)
-                    builder!.setNotification(content)
-                })
+                let event = PushNotification(date: dateString, action: actionIdentifier, trigger: SPUtilities.getTriggerType(request.trigger), category: requestContent.categoryIdentifier, thread: requestContent.threadIdentifier, notification: content)
                 
                 //print(String(data: try! JSONSerialization.data(withJSONObject: event!.getPayload().getAsDictionary(), options: .prettyPrinted), encoding: .utf8 )!)
                 rootViewController.tracker?.track(event)

@@ -62,7 +62,7 @@
 }
 
 - (void) setup {
-    _tracker = [self getTrackerWithUrl:@"http://acme.fake.com" method:SPRequestPost];
+    _tracker = [self getTrackerWithUrl:@"http://acme.fake.com" method:SPHttpMethodPost];
     _updateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateMetrics) userInfo:nil repeats:YES];
     _urlTextField.delegate = self;
     [_trackingOnOff addTarget:self
@@ -72,7 +72,7 @@
 
 - (IBAction) trackEvents:(id)sender {
     NSString *url = [self getCollectorUrl];
-    SPRequestOptions methodType = [self getMethodType];
+    SPHttpMethod methodType = [self getMethodType];
     SPProtocol protocolType = [self getProtocolType];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([url isEqual: @""]) {
@@ -92,11 +92,8 @@
         [self->_tracker.emitter setHttpMethod:methodType];
         [self->_tracker.emitter setProtocol:protocolType];
         
-        // Itterate the made counter
-        self->_madeCounter += 15;
-        
-        // Track all types of events!
-        [DemoUtils trackAll:self->_tracker];
+        // Track all types of events and update count of total number of tracked events
+        self->_madeCounter += [DemoUtils trackAll:self->_tracker];
     });
 }
 
@@ -122,12 +119,12 @@
     return _urlTextField.text;
 }
 
-- (enum SPRequestOptions) getMethodType {
-    return _methodType.selectedSegmentIndex == 0 ? SPRequestGet : SPRequestPost;
+- (enum SPHttpMethod) getMethodType {
+    return _methodType.selectedSegmentIndex == 0 ? SPHttpMethodGet : SPHttpMethodPost;
 }
 
 - (enum SPProtocol) getProtocolType {
-    return _protocolType.selectedSegmentIndex == 0 ? SPHttp : SPHttps;
+    return _protocolType.selectedSegmentIndex == 0 ? SPProtocolHttp : SPProtocolHttps;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
@@ -140,7 +137,7 @@ static NSString *const kNamespace = @"DemoAppNamespace";
 // Tracker Setup & Init
 
 - (SPTracker *) getTrackerWithUrl:(NSString *)url_
-                           method:(enum SPRequestOptions)method_ {
+                           method:(enum SPHttpMethod)method_ {
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:url_];
         [builder setHttpMethod:method_];

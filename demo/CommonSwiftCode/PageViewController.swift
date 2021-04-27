@@ -23,14 +23,13 @@
 import UIKit
 import SnowplowTracker
 
-class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, SPRequestCallback {
+class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, RequestCallback {
 
-    var tracker : SPTracker!
+    var tracker : TrackerController!
     var madeCounter : Int = 0
     var sentCounter : Int = 0
     var uri : String = ""
-    var methodType : SPRequestOptions = .get
-    var protocolType : SPProtocol = .http
+    var methodType : HttpMethodOptions = .get
     var token : String = ""
     @objc dynamic var snowplowId: String! = "page view"
 
@@ -39,62 +38,55 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
     // Tracker setup and init
 
-    func getTracker(_ url: String, method: SPRequestOptions) -> SPTracker {
-        let eventStore = SPSQLiteEventStore();
-        let network = SPDefaultNetworkConnection.build { (builder) in
+    func getTracker(_ url: String, method: HttpMethodOptions) -> TrackerController {
+        let eventStore = SQLiteEventStore(namespace: kNamespace);
+        let network = DefaultNetworkConnection.build { (builder) in
             builder.setUrlEndpoint(url)
             builder.setHttpMethod(method)
             builder.setEmitThreadPoolSize(20)
             builder.setByteLimitPost(52000)
         }
-        let emitter = SPEmitter.build({ (builder : SPEmitterBuilder?) -> Void in
-            builder!.setCallback(self)
-            builder!.setEmitRange(500)
-            builder!.setEventStore(eventStore)
-            builder!.setNetworkConnection(network)
-        })
-        let subject = SPSubject(platformContext: true, andGeoContext: false)
-        let newTracker = SPTracker.build({ (builder : SPTrackerBuilder?) -> Void in
-            builder!.setEmitter(emitter)
-            builder!.setAppId(self.kAppId)
-            builder!.setTrackerNamespace(self.kNamespace)
-            builder!.setBase64Encoded(false)
-            builder!.setSessionContext(true)
-            builder!.setSubject(subject)
-            builder!.setLifecycleEvents(true)
-            builder!.setAutotrackScreenViews(true)
-            builder!.setScreenContext(true)
-            builder!.setApplicationContext(true)
-            builder!.setExceptionEvents(true)
-            builder!.setInstallEvent(true)
-            // set global context generators
-            builder!.setGlobalContextGenerators([
-                "ruleSetExampleTag": self.ruleSetGlobalContextExample(),
-                "staticExampleTag": self.staticGlobalContextExample(),
-            ])
-            builder!.setGdprContextWith(SPGdprProcessingBasis.consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-            // set diagnostic and logger delegate
-            builder?.setTrackerDiagnostic(true)
-            builder?.setLogLevel(.verbose)
-            builder?.setLoggerDelegate(self)
-        })
-        return newTracker!
+        let networkConfig = NetworkConfiguration(networkConnection: network)
+        let trackerConfig = TrackerConfiguration()
+            .base64Encoding(false)
+            .sessionContext(true)
+            .platformContext(true)
+            .geoLocationContext(false)
+            .lifecycleAutotracking(true)
+            .screenViewAutotracking(true)
+            .screenContext(true)
+            .applicationContext(true)
+            .exceptionAutotracking(true)
+            .installAutotracking(true)
+            .diagnosticAutotracking(true)
+            .logLevel(.verbose)
+            .loggerDelegate(self)
+        let emitterConfig = EmitterConfiguration()
+            .eventStore(eventStore)
+            .emitRange(500)
+            .requestCallback(self)
+        let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
+        let gcConfig = GlobalContextsConfiguration()
+        gcConfig.add(tag: "ruleSetExampleTag", contextGenerator: ruleSetGlobalContextExample())
+        gcConfig.add(tag: "staticExampleTag", contextGenerator: staticGlobalContextExample())
+        
+        return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig, gcConfig]);
     }
     
-    func ruleSetGlobalContextExample() -> SPGlobalContext {
-        let schemaRuleset = SPSchemaRuleset(allowedList: ["iglu:com.snowplowanalytics.*/*/jsonschema/1-*-*"],
+    func ruleSetGlobalContextExample() -> GlobalContext {
+        let schemaRuleset = SchemaRuleset(allowedList: ["iglu:com.snowplowanalytics.*/*/jsonschema/1-*-*"],
                                             andDeniedList: ["iglu:com.snowplowanalytics.mobile/*/jsonschema/1-*-*"])
-        return SPGlobalContext(generator: { event -> [SPSelfDescribingJson]? in
+        return GlobalContext(generator: { event -> [SelfDescribingJson]? in
             return [
-                SPSelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "rulesetExample"] as NSObject),
-                SPSelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["eventName": event.schema] as NSObject)
+                SelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "rulesetExample"] as NSObject),
+                SelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["eventName": event.schema] as NSObject)
             ]
         }, ruleset: schemaRuleset)
     }
     
-    func staticGlobalContextExample() -> SPGlobalContext {
-        return SPGlobalContext(staticContexts: [
-            SPSelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExample"] as NSObject),
+    func staticGlobalContextExample() -> GlobalContext {
+        return GlobalContext(staticContexts: [
+            SelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExample"] as NSObject),
         ])
     }
 
@@ -106,16 +98,14 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         return self.uri
     }
 
-    func getMethodType() -> SPRequestOptions {
+    func getMethodType() -> HttpMethodOptions {
         return self.methodType
     }
 
-    func getProtocolType() -> SPProtocol {
-        return self.protocolType
-    }
-    
     func setup() {
-        self.tracker = self.getTracker("acme.fake.com", method: .post)
+        if (!uri.isEmpty) {
+            self.tracker = self.getTracker(uri, method: methodType)
+        }
     }
 
     func newVc(viewController: String) -> UIViewController {
@@ -209,16 +199,16 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
 }
 
-extension PageViewController: SPLoggerDelegate {
-    func error(_ tag: String!, message: String!) {
-        print("[Error] \(tag!): \(message!)")
+extension PageViewController: LoggerDelegate {
+    func error(_ tag: String, message: String) {
+        print("[Error] \(tag): \(message)")
     }
     
-    func debug(_ tag: String!, message: String!) {
-        print("[Debug] \(tag!): \(message!)")
+    func debug(_ tag: String, message: String) {
+        print("[Debug] \(tag): \(message)")
     }
     
-    func verbose(_ tag: String!, message: String!) {
-        print("[Verbose] \(tag!): \(message!)")
+    func verbose(_ tag: String, message: String) {
+        print("[Verbose] \(tag): \(message)")
     }
 }

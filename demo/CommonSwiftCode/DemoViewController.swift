@@ -35,24 +35,25 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
 
     @IBOutlet weak var uriField: UITextField!
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
-    @IBOutlet weak var protocolSwitch: UISegmentedControl!
     @IBOutlet weak var methodSwitch: UISegmentedControl!
-    weak var tracker : SPTracker?
+    var tracker : TrackerController? {
+        let t: TrackerController? = parentPageViewController.tracker
+        return t
+    }
 
     var parentPageViewController: PageViewController!
     @objc dynamic var snowplowId: String! = "demo view"
 
     func getParentPageViewController(parentRef: PageViewController) {
         parentPageViewController = parentRef
-        tracker = parentRef.tracker
     }
 
     @objc func action() {
         let tracking: Bool = (trackingSwitch.selectedSegmentIndex == 0)
-        if (tracking && !(tracker?.getIsTracking() ?? false)) {
-            tracker?.resumeEventTracking()
-        } else if (tracker?.getIsTracking() ?? false) {
-            tracker?.pauseEventTracking()
+        if (tracking && !(tracker?.isTracking ?? false)) {
+            tracker?.resume()
+        } else if (tracker?.isTracking ?? false) {
+            tracker?.pause()
         }
     }
     
@@ -67,6 +68,7 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
         self.trackingSwitch.addTarget(self, action: #selector(action), for: .valueChanged)
         // Do any additional setup after loading the view, typically from a nib.
         uriField.text = UserDefaults.standard.string(forKey: keyUriField) ?? ""
+        inputUri(uriField)
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,29 +85,21 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
             .get : .post
     }
     
-    @IBAction func toggleProtocol(_ sender: UISegmentedControl) {
-        self.parentPageViewController.protocolType = (protocolSwitch.selectedSegmentIndex == 0) ?
-            .http: .https
-    }
-    
     @IBAction func trackEvents(_ sender: UIButton) {
         UserDefaults.standard.set(uriField.text ?? "", forKey: keyUriField);
         DispatchQueue.global(qos: .default).async {
+            self.parentPageViewController.setup()
             let url = self.parentPageViewController.getCollectorUrl()
-            if url == "" {
+            guard !url.isEmpty, let tracker = self.tracker else {
                 return
             }
             
             // Update the tracker
-            self.tracker?.emitter.setUrlEndpoint(url)
-            self.tracker?.emitter.setHttpMethod(self.parentPageViewController.getMethodType())
-            self.tracker?.emitter.setProtocol(self.parentPageViewController.getProtocolType())
+            tracker.network?.endpoint = url
+            tracker.network?.method = self.parentPageViewController.getMethodType()
             
-            // Iterate the made counter
-            self.parentPageViewController.madeCounter += 14;
-            
-            // Track all types of events
-            DemoUtils.trackAll(self.parentPageViewController.tracker)
+            // Track all types of events and increase number of tracked events
+            self.parentPageViewController.madeCounter += DemoUtils.trackAll(tracker)
         }
     }
 }

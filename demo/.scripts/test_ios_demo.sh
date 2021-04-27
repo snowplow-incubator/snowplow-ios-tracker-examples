@@ -50,10 +50,12 @@ elif [ $DEP_TYPE == "SPM" ]; then
 	sed -i .backup "s|master|$DEP_BRANCH|g" Package.swift
 	popd
 elif [ $DEP_FILE == "Podfile" ]; then
+	. .scripts/macos-10-15-workaround.sh # to remove if fixed when the host is not macos-10.15 and xcode 10.3
 	printf "\n\n Pod update \n"
 	cd $APP
 	pod update
 elif [[ $DEP_FILE == Podfile* ]]; then
+	. .scripts/macos-10-15-workaround.sh # to remove if fixed when the host is not macos-10.15 and xcode 10.3
 	printf "\n\n Pod update with Podfile: " + $DEP_FILE + " \n"
 	cp -rf .scripts/$DEP_FILE $APP/Podfile
 	cd $APP

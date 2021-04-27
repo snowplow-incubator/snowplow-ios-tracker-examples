@@ -24,46 +24,40 @@ import WatchKit
 import Foundation
 import SnowplowTracker
 
-class InterfaceController: WKInterfaceController, SPRequestCallback {
+class InterfaceController: WKInterfaceController, RequestCallback {
     
     let kAppId     = "DemoAppId"
     let kNamespace = "DemoAppNamespace"
     
-    func getTracker(_ url: String, method: SPRequestOptions, protocol _protocol: SPProtocol) -> SPTracker {
-        let emitter = SPEmitter.build({ (builder : SPEmitterBuilder?) -> Void in
-            builder!.setUrlEndpoint(url)
-            builder!.setHttpMethod(method)
-            builder!.setProtocol(_protocol)
-            builder!.setCallback(self)
-            builder!.setEmitRange(500)
-            builder!.setEmitThreadPoolSize(20)
-            builder!.setByteLimitPost(52000)
-        })
-        let subject = SPSubject(platformContext: true, andGeoContext: false)
-        let newTracker = SPTracker.build({ (builder : SPTrackerBuilder?) -> Void in
-            builder!.setEmitter(emitter)
-            builder!.setAppId(self.kAppId)
-            builder!.setTrackerNamespace(self.kNamespace)
-            builder!.setBase64Encoded(false)
-            builder!.setSessionContext(true)
-            builder!.setSubject(subject)
-            builder!.setLifecycleEvents(true)
-            builder!.setAutotrackScreenViews(true)
-            builder!.setScreenContext(true)
-            builder!.setApplicationContext(true)
-            builder!.setExceptionEvents(true)
-            builder!.setInstallEvent(true)
-            builder!.setGdprContextWith(SPGdprProcessingBasis.consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-        })
-        return newTracker!
+    func getTracker(_ url: String, method: HttpMethodOptions) -> TrackerController {
+        let networkConfig = NetworkConfiguration(endpoint: url, method: method)
+        let emitterConfig = EmitterConfiguration()
+            .byteLimitPost(52000)
+            .threadPoolSize(20)
+            .emitRange(500)
+            .requestCallback(self)
+        let trackerConfig = TrackerConfiguration()
+            .appId(kAppId)
+            .base64Encoding(false)
+            .sessionContext(true)
+            .platformContext(true)
+            .geoLocationContext(false)
+            .lifecycleAutotracking(true)
+            .screenViewAutotracking(true)
+            .screenContext(true)
+            .applicationContext(true)
+            .exceptionAutotracking(true)
+            .installAutotracking(true)
+        let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
+        return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig]);
     }
     
-    var tracker : SPTracker!
+    var tracker : TrackerController!
     
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        self.tracker = self.getTracker("acme.fake.com", method: .get, protocol: .http)
+        self.tracker = self.getTracker("http://acme.fake.com", method: .get)
         // Configure interface objects here.
     }
     
