@@ -29,7 +29,9 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     var madeCounter : Int = 0
     var sentCounter : Int = 0
     var uri : String = ""
+    var previousUri : String? = nil
     var methodType : HttpMethodOptions = .get
+    var isRemoteConfig = false
     var token : String = ""
     @objc dynamic var snowplowId: String! = "page view"
 
@@ -38,7 +40,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
     // Tracker setup and init
 
-    func getTracker(_ url: String, method: HttpMethodOptions) -> TrackerController {
+    func initTracker(_ url: String, method: HttpMethodOptions) -> TrackerController {
         let eventStore = SQLiteEventStore(namespace: kNamespace);
         let network = DefaultNetworkConnection.build { (builder) in
             builder.setUrlEndpoint(url)
@@ -66,30 +68,24 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             .emitRange(500)
             .requestCallback(self)
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-        let gcConfig = GlobalContextsConfiguration()
-        gcConfig.add(tag: "ruleSetExampleTag", contextGenerator: ruleSetGlobalContextExample())
-        gcConfig.add(tag: "staticExampleTag", contextGenerator: staticGlobalContextExample())
         
-        return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig, gcConfig]);
+        return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig]);
     }
     
-    func ruleSetGlobalContextExample() -> GlobalContext {
-        let schemaRuleset = SchemaRuleset(allowedList: ["iglu:com.snowplowanalytics.*/*/jsonschema/1-*-*"],
-                                            andDeniedList: ["iglu:com.snowplowanalytics.mobile/*/jsonschema/1-*-*"])
-        return GlobalContext(generator: { event -> [SelfDescribingJson]? in
-            return [
-                SelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "rulesetExample"] as NSObject),
-                SelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["eventName": event.schema] as NSObject)
-            ]
-        }, ruleset: schemaRuleset)
+    func remoteTracker(_ url: String, isRefresh: Bool, callback: @escaping (TrackerController?) -> Void) {
+        let remoteConfig = RemoteConfiguration(endpoint: url, method: .get)
+        let successCallback: ([String]?) -> Void = { _ in
+            let tracker = Snowplow.defaultTracker()
+            tracker?.emitter.requestCallback = self
+            callback(tracker)
+        }
+        if isRefresh {
+            Snowplow.refresh(onSuccess: successCallback)
+        } else {
+            Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: nil, onSuccess: successCallback)
+        }
     }
     
-    func staticGlobalContextExample() -> GlobalContext {
-        return GlobalContext(staticContexts: [
-            SelfDescribingJson.init(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExample"] as NSObject),
-        ])
-    }
-
     func updateToken(_ newToken: String) {
         token = newToken
     }
@@ -102,9 +98,23 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         return self.methodType
     }
 
-    func setup() {
-        if (!uri.isEmpty) {
-            self.tracker = self.getTracker(uri, method: methodType)
+    func setup(callback: @escaping () -> Void) {
+        if (uri.isEmpty) {
+            return
+        }
+        if (isRemoteConfig) {
+            let isRefresh = uri == previousUri
+            remoteTracker(uri, isRefresh: isRefresh) { [self] trackerController in
+                guard let tracker = trackerController else {
+                    return
+                }
+                self.tracker = tracker
+                previousUri = uri
+                callback()
+            }
+        } else {
+            tracker = initTracker(uri, method: methodType)
+            callback()
         }
     }
 
@@ -169,7 +179,6 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
-        self.setup()
         // This sets up the first view that will show up on our page control
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
@@ -183,7 +192,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     func onSuccess(withCount successCount: Int) {
         self.sentCounter += successCount;
     }
-
+    
     func onFailure(withCount failureCount: Int, successCount: Int) {
         self.sentCounter += successCount;
     }
