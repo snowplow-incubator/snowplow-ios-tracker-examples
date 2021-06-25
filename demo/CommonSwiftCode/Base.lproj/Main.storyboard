@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BD3-Hb-Mgx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BD3-Hb-Mgx">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment version="4096" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Demo controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="demo" title="Demo controller" id="BYZ-38-t0r" customClass="DemoViewController" customModule="SnowplowSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="demo" title="Demo controller" id="BYZ-38-t0r" customClass="DemoViewController" customModule="SnowplowSwiftSPMDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5uI-r0-eBh">
-                                <rect key="frame" x="8" y="154.5" width="359" height="358"/>
+                                <rect key="frame" x="8" y="108" width="359" height="451"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="iOS Tracker Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMA-qq-WAn">
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="24"/>
@@ -27,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="plx-9z-1Ct">
-                                        <rect key="frame" x="0.0" y="44" width="359" height="260"/>
+                                        <rect key="frame" x="0.0" y="44" width="359" height="299"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYj-dR-yWd">
                                                 <rect key="frame" x="4.5" y="0.0" width="350" height="111.5"/>
@@ -87,12 +88,12 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tWJ-0h-PUi">
-                                                <rect key="frame" x="0.0" y="190" width="359" height="70"/>
+                                                <rect key="frame" x="0.0" y="190" width="359" height="109"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vxF-6h-kX3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="236" height="70"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="236" height="109"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Tracking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0F-L4-fnZ">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Config" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0F-L4-fnZ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="31"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="dcl-YH-Nbz"/>
@@ -101,8 +102,17 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Method" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shx-ct-gNC">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Tracking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nag-v3-rLW">
                                                                 <rect key="frame" x="0.0" y="39" width="80" height="31"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="80" id="BZe-po-K6m"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Method" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shx-ct-gNC">
+                                                                <rect key="frame" x="0.0" y="78" width="80" height="31"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="JZU-la-VQ2"/>
                                                                 </constraints>
@@ -113,14 +123,17 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Fx9-3e-pNh">
-                                                        <rect key="frame" x="250" y="0.0" width="109" height="70"/>
+                                                        <rect key="frame" x="244" y="0.0" width="115" height="109"/>
                                                         <subviews>
-                                                            <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dS3-zi-E3u">
-                                                                <rect key="frame" x="0.0" y="0.0" width="109" height="32"/>
+                                                            <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Dlr-Qj-DMN">
+                                                                <rect key="frame" x="0.0" y="0.0" width="115" height="32"/>
                                                                 <segments>
-                                                                    <segment title="ON"/>
-                                                                    <segment title="OFF"/>
+                                                                    <segment title="Remote"/>
+                                                                    <segment title="Local"/>
                                                                 </segments>
+                                                                <connections>
+                                                                    <action selector="configSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="xx8-KA-ZDh"/>
+                                                                </connections>
                                                             </segmentedControl>
                                                             <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="99g-ty-uUN">
                                                                 <rect key="frame" x="0.0" y="39" width="109" height="32"/>
@@ -131,6 +144,13 @@
                                                                 <connections>
                                                                     <action selector="toggleMethod:" destination="BYZ-38-t0r" eventType="valueChanged" id="eTT-Bc-Gne"/>
                                                                 </connections>
+                                                            </segmentedControl>
+                                                            <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dS3-zi-E3u">
+                                                                <rect key="frame" x="0.0" y="78" width="109" height="32"/>
+                                                                <segments>
+                                                                    <segment title="ON"/>
+                                                                    <segment title="OFF"/>
+                                                                </segments>
                                                             </segmentedControl>
                                                         </subviews>
                                                         <constraints>
@@ -153,8 +173,20 @@
                                             <constraint firstAttribute="trailing" secondItem="tWJ-0h-PUi" secondAttribute="trailing" id="vIt-ko-s1E"/>
                                         </constraints>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDS-SZ-UbT">
+                                        <rect key="frame" x="0.0" y="363" width="359" height="34"/>
+                                        <state key="normal" title="Setup/Refresh remote config">
+                                            <color key="titleColor" red="0.2042752504" green="0.47266590600000002" blue="0.96475917099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" systemColor="systemGray2Color"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="setupConfigBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gAc-Uc-Vp0"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfX-ww-y4G">
-                                        <rect key="frame" x="0.0" y="324" width="359" height="34"/>
+                                        <rect key="frame" x="0.0" y="417" width="359" height="34"/>
                                         <state key="normal" title="Send events">
                                             <color key="titleColor" red="0.20427525043487549" green="0.47266590595245361" blue="0.96475917100906372" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
@@ -179,6 +211,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="configSwitch" destination="Dlr-Qj-DMN" id="e0U-X9-toV"/>
                         <outlet property="dbCountLabel" destination="Qph-Hw-jCO" id="E7g-e3-sek"/>
                         <outlet property="isBackgroundLabel" destination="gYI-m0-zoe" id="ul9-iU-Wbz"/>
                         <outlet property="isOnlineLabel" destination="7tI-XG-Bak" id="IRt-h4-FaV"/>
@@ -187,6 +220,7 @@
                         <outlet property="methodSwitch" destination="99g-ty-uUN" id="5fm-PD-1QS"/>
                         <outlet property="sentLabel" destination="yf4-RK-1Tn" id="f5z-BI-GpR"/>
                         <outlet property="sessionCountLabel" destination="58a-Ko-ZOc" id="7gs-c8-RPf"/>
+                        <outlet property="setupConfigBtn" destination="qDS-SZ-UbT" id="gQg-iV-5ca"/>
                         <outlet property="tokenLabel" destination="ioX-gx-LtY" id="aSQ-KV-geY"/>
                         <outlet property="trackingSwitch" destination="dS3-zi-E3u" id="7vP-pJ-SBZ"/>
                         <outlet property="uriField" destination="Hkc-q6-GKS" id="qtq-nB-my5"/>
@@ -199,7 +233,7 @@
         <!--Metrics controller-->
         <scene sceneID="ToC-jt-m1c">
             <objects>
-                <viewController storyboardIdentifier="metrics" title="Metrics controller" id="yEk-KA-DEO" customClass="MetricsViewController" customModule="SnowplowSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="metrics" title="Metrics controller" id="yEk-KA-DEO" customClass="MetricsViewController" customModule="SnowplowSwiftSPMDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TYn-K2-B4R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -300,7 +334,7 @@
         <!--Pageview controller-->
         <scene sceneID="RMb-kq-vD5">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" title="Pageview controller" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="BD3-Hb-Mgx" customClass="PageViewController" customModule="SnowplowSwiftDemo" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" title="Pageview controller" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="BD3-Hb-Mgx" customClass="PageViewController" customModule="SnowplowSwiftSPMDemo" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q1C-T3-RIc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="479" y="-618"/>
@@ -308,7 +342,7 @@
         <!--Additional View Controller-->
         <scene sceneID="ifC-2O-6p1">
             <objects>
-                <viewController storyboardIdentifier="additional" id="OQ6-f8-9wr" customClass="AdditionalViewController" customModule="SnowplowSwiftDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="additional" id="OQ6-f8-9wr" customClass="AdditionalViewController" customModule="SnowplowSwiftSPMDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LnC-5B-NDm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -342,4 +376,9 @@
             <point key="canvasLocation" x="2088.8000000000002" y="115.59220389805098"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

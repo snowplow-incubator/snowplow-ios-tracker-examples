@@ -26,7 +26,7 @@ import CoreData
 import SnowplowTracker
 
 // Used for all child views
-protocol PageObserver: class {
+protocol PageObserver: AnyObject {
     func getParentPageViewController(parentRef: PageViewController)
 }
 
@@ -34,8 +34,11 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     private let keyUriField = "URL-Endpoint";
 
     @IBOutlet weak var uriField: UITextField!
+    @IBOutlet weak var configSwitch: UISegmentedControl!
     @IBOutlet weak var trackingSwitch: UISegmentedControl!
     @IBOutlet weak var methodSwitch: UISegmentedControl!
+    @IBOutlet weak var setupConfigBtn: UIButton!
+    
     var tracker : TrackerController? {
         let t: TrackerController? = parentPageViewController.tracker
         return t
@@ -85,21 +88,46 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
             .get : .post
     }
     
+    @IBAction func configSwitchChanged(_ sender: UISegmentedControl) {
+        let isRemote = (sender.selectedSegmentIndex == 0)
+        self.parentPageViewController.isRemoteConfig = isRemote
+        self.setupConfigBtn.isEnabled = isRemote
+    }
+    
     @IBAction func trackEvents(_ sender: UIButton) {
+        guard let tracker = self.tracker else {
+            return
+        }
+        // Track all types of events and increase number of tracked events
+        self.parentPageViewController.madeCounter += DemoUtils.trackAll(tracker)
+    }
+    
+    @IBAction func setupConfigBtnAction(_ sender: UIButton) {
         UserDefaults.standard.set(uriField.text ?? "", forKey: keyUriField);
-        DispatchQueue.global(qos: .default).async {
-            self.parentPageViewController.setup()
-            let url = self.parentPageViewController.getCollectorUrl()
-            guard !url.isEmpty, let tracker = self.tracker else {
-                return
+        self.parentPageViewController.setup {
+            DispatchQueue.main.async {
+                self.showToast(message: "Tracker config updated")
             }
-            
-            // Update the tracker
-            tracker.network?.endpoint = url
-            tracker.network?.method = self.parentPageViewController.getMethodType()
-            
-            // Track all types of events and increase number of tracked events
-            self.parentPageViewController.madeCounter += DemoUtils.trackAll(tracker)
         }
     }
+    
+    // Toast message
+    
+    private func showToast(message : String) {
+        let toastLabel = UILabel(frame: CGRect(x: 10, y: self.view.frame.size.height-100, width: self.view.frame.size.width-20, height: 50))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    
 }
