@@ -69,7 +69,9 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             .requestCallback(self)
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
         
-        return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig]);
+        let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig])
+        
+        return tracker
     }
     
     func remoteTracker(_ url: String, isRefresh: Bool, callback: @escaping (TrackerController?) -> Void) {
@@ -109,7 +111,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
                     return
                 }
                 self.tracker = tracker
-                previousUri = uri
+                self.previousUri = self.uri
                 callback()
             }
         } else {

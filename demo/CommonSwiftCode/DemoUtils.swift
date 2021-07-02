@@ -36,7 +36,7 @@ class DemoUtils {
     static func trackStructuredEventWithTracker(_ tracker: TrackerController) -> Int {
         let event = Structured(category: "DemoCategory", action: "DemoAction")
             .label("DemoLabel")
-            .property("DemoProperty")
+            .property("DemoProperty much longer than the expected value.")
             .value(5)
         tracker.track(event)
         return 1

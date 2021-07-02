@@ -91,7 +91,6 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
     @IBAction func configSwitchChanged(_ sender: UISegmentedControl) {
         let isRemote = (sender.selectedSegmentIndex == 0)
         self.parentPageViewController.isRemoteConfig = isRemote
-        self.setupConfigBtn.isEnabled = isRemote
     }
     
     @IBAction func trackEvents(_ sender: UIButton) {
@@ -99,7 +98,9 @@ class DemoViewController: UIViewController, UITextFieldDelegate, PageObserver {
             return
         }
         // Track all types of events and increase number of tracked events
-        self.parentPageViewController.madeCounter += DemoUtils.trackAll(tracker)
+        let eventsTracked = DemoUtils.trackAll(tracker)
+        self.parentPageViewController.madeCounter += eventsTracked
+        showToast(message: "\(eventsTracked) events tracked")
     }
     
     @IBAction func setupConfigBtnAction(_ sender: UIButton) {

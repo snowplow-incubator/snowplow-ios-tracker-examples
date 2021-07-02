@@ -102,19 +102,19 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Tracking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nag-v3-rLW">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Method" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shx-ct-gNC">
                                                                 <rect key="frame" x="0.0" y="39" width="80" height="31"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="80" id="BZe-po-K6m"/>
+                                                                    <constraint firstAttribute="width" constant="80" id="JZU-la-VQ2"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Method" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shx-ct-gNC">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Tracking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nag-v3-rLW">
                                                                 <rect key="frame" x="0.0" y="78" width="80" height="31"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="80" id="JZU-la-VQ2"/>
+                                                                    <constraint firstAttribute="width" constant="80" id="BZe-po-K6m"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
@@ -173,9 +173,9 @@
                                             <constraint firstAttribute="trailing" secondItem="tWJ-0h-PUi" secondAttribute="trailing" id="vIt-ko-s1E"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDS-SZ-UbT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDS-SZ-UbT">
                                         <rect key="frame" x="0.0" y="363" width="359" height="34"/>
-                                        <state key="normal" title="Setup/Refresh remote config">
+                                        <state key="normal" title="Setup/Refresh configuration">
                                             <color key="titleColor" red="0.2042752504" green="0.47266590600000002" blue="0.96475917099999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <state key="disabled">
