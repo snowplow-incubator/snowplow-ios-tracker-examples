@@ -74,7 +74,7 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     @IBAction func sendEvent() {
         DispatchQueue.global(qos: .default).async {
             // Track all types of events
-            DemoUtils.trackAll(self.tracker)
+            _ = DemoUtils.trackAll(self.tracker)
         }
     }
     
