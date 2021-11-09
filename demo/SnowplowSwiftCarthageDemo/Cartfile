@@ -1,1 +1,1 @@
-git "file:///Users/alexbenini/dev/snowplow/snowplow-objc-tracker" "master"
+git "file:///Users/alexbenini/dev/snowplow/snowplow-objc-tracker" "issue/652-remove_v1_api"

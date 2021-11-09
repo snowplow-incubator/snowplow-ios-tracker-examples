@@ -2,11 +2,11 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - SnowplowTracker (1.4.1):
-    - FMDB (~> 2.6)
+  - SnowplowTracker (2.2.2):
+    - FMDB (~> 2.7)
 
 DEPENDENCIES:
-  - SnowplowTracker (from `../../`)
+  - SnowplowTracker (from `../../../snowplow-objc-tracker`)
 
 SPEC REPOS:
   trunk:
@@ -14,12 +14,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   SnowplowTracker:
-    :path: "../../"
+    :path: "../../../snowplow-objc-tracker"
 
 SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  SnowplowTracker: 1f6d4f732cd2d5ff36094cac71a3bf362138716a
+  SnowplowTracker: 2eee2d6606a60db98f7c4e1515499bb216b6c8ad
 
-PODFILE CHECKSUM: f3a4104d16d359e8732a719d55eac06c4e95744e
+PODFILE CHECKSUM: 332ad588f7addb57f6e015cb323c56fea7bff8d8
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1
