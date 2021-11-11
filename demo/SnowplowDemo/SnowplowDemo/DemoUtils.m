@@ -22,25 +22,29 @@
 
 #import "DemoUtils.h"
 #import "SPPayload.h"
-#import "SPTracker.h"
 #import "SPSelfDescribingJson.h"
-#import "SPEvent.h"
+#import "SPStructured.h"
+#import "SPSelfDescribing.h"
+#import "SPPageView.h"
+#import "SPScreenView.h"
+#import "SPTiming.h"
+#import "SPEcommerceItem.h"
+#import "SPEcommerce.h"
 
 @implementation DemoUtils {}
 
-+ (int)trackAll:(SPTracker *)tracker_ {
++ (int)trackAll:(id<SPTrackerController>)tracker_ {
     return [self trackStructuredEventWithTracker:tracker_]
     + [self trackUnstructuredEventWithTracker:tracker_]
     + [self trackPageViewWithTracker:tracker_]
     + [self trackScreenViewWithTracker:tracker_]
     + [self trackTimingWithCategoryWithTracker:tracker_]
-    + [self trackEcommerceTransactionWithTracker:tracker_]
-    + [self trackPushNotificationWithTracker:tracker_];
+    + [self trackEcommerceTransactionWithTracker:tracker_];
 }
 
 // Event Tracking
 
-+ (int)trackStructuredEventWithTracker:(SPTracker *)tracker_ {
++ (int)trackStructuredEventWithTracker:(id<SPTrackerController>)tracker_ {
     SPStructured *event = [[SPStructured alloc] initWithCategory:@"DemoCategory" action:@"DemoAction"];
     [event label:@"DemoLabel"];
     [event property:@"DemoProperty"];
@@ -49,7 +53,7 @@
     return 1;
 }
 
-+ (int)trackUnstructuredEventWithTracker:(SPTracker *)tracker_ {
++ (int)trackUnstructuredEventWithTracker:(id<SPTrackerController>)tracker_ {
     NSDictionary * data = @{@"targetUrl": @"http://a-target-url.com"};
     SPSelfDescribingJson * sdj = [[SPSelfDescribingJson alloc] initWithSchema:@"iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1"
                                                                     andData:data];
@@ -58,7 +62,7 @@
     return 1;
 }
 
-+ (int)trackPageViewWithTracker:(SPTracker *)tracker_ {
++ (int)trackPageViewWithTracker:(id<SPTrackerController>)tracker_ {
     SPPageView *event = [[SPPageView alloc] initWithPageUrl:@"DemoPageUrl"];
         [event pageTitle:@"DemoPageTitle"];
         [event referrer:@"DemoPageReferrer"];
@@ -66,21 +70,21 @@
     return 1;
 }
 
-+ (int)trackScreenViewWithTracker:(SPTracker *)tracker_ {
++ (int)trackScreenViewWithTracker:(id<SPTrackerController>)tracker_ {
     NSUUID *screenId = [NSUUID UUID];
     SPScreenView *event = [[SPScreenView alloc] initWithName:@"DemoScreenName" screenId:screenId];
     [tracker_ track:event];
     return 1;
 }
 
-+ (int)trackTimingWithCategoryWithTracker:(SPTracker *)tracker_ {
++ (int)trackTimingWithCategoryWithTracker:(id<SPTrackerController>)tracker_ {
     SPTiming *event = [[SPTiming alloc] initWithCategory:@"DemoTimingCategory" variable:@"DemoTimingVariable" timing:@5];
     [event label:@"DemoTimingLabel"];
     [tracker_ track:event];
     return 1;
 }
 
-+ (int)trackEcommerceTransactionWithTracker:(SPTracker *)tracker_ {
++ (int)trackEcommerceTransactionWithTracker:(id<SPTrackerController>)tracker_ {
     NSString *transactionID = @"6a8078be";
     NSMutableArray *itemArray = [NSMutableArray array];
     
@@ -101,33 +105,6 @@
     event.currency = @"USD";
     [tracker_ track:event];
     return 2;
-}
-
-+ (int)trackPushNotificationWithTracker:(SPTracker *)tracker_ {
-    NSMutableArray * attachments = [[NSMutableArray alloc] init];
-    [attachments addObject:@{ @"identifier" : @"testidentifier",
-                              @"url" : @"testurl",
-                              @"type" : @"testtype"
-                              }];
-
-    NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] init];
-    [userInfo setObject:@"test" forKey:@"test"];
-    
-    SPNotificationContent * content = [[SPNotificationContent alloc] initWithTitle:@"title" body:@"body" badge:@5];
-    content.subtitle = @"subtitle";
-    content.sound = @"sound";
-    content.launchImageName = @"launchImageName";
-    content.userInfo = userInfo.copy;
-    content.attachments = attachments.copy;
-
-    SPPushNotification * event = [[SPPushNotification alloc] initWithDate:@"date"
-                                                                   action:@"action"
-                                                                  trigger:@"PUSH"
-                                                                 category:@"category"
-                                                                   thread:@"thread"
-                                                             notification:content];
-    [tracker_ track:event];
-    return 1;
 }
 
 @end

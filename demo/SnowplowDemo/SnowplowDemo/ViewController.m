@@ -22,10 +22,12 @@
 
 #import "ViewController.h"
 #import "DemoUtils.h"
-#import "SPTracker.h"
-#import "SPEmitter.h"
-#import "SPUtilities.h"
-#import "SPSubject.h"
+#import "SPSnowplow.h"
+#import "SPNetworkConfiguration.h"
+#import "SPEmitterConfiguration.h"
+#import "SPTrackerConfiguration.h"
+#import "SPGlobalContextsConfiguration.h"
+#import "SPTrackerController.h"
 #import "SPSchemaRuleset.h"
 #import "SPSelfDescribingJson.h"
 
@@ -46,7 +48,7 @@
 @end
 
 @implementation ViewController {
-    SPTracker *       _tracker;
+    id<SPTrackerController> _tracker;
     long long int     _madeCounter;
     long long int     _sentCounter;
     NSTimer *         _updateTimer;
@@ -62,7 +64,7 @@
 }
 
 - (void) setup {
-    _tracker = [self getTrackerWithUrl:@"http://acme.fake.com" method:SPHttpMethodPost];
+    _tracker = [self trackerWithUrl:@"http://acme.fake.com" method:SPHttpMethodPost];
     _updateTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateMetrics) userInfo:nil repeats:YES];
     _urlTextField.delegate = self;
     [_trackingOnOff addTarget:self
@@ -71,9 +73,9 @@
 }
 
 - (IBAction) trackEvents:(id)sender {
-    NSString *url = [self getCollectorUrl];
+    NSString *prefix = [self getProtocolType] == SPProtocolHttp ? @"http://" : @"https://";
+    NSString *url = [NSString stringWithFormat:@"%@%@", prefix, [self getCollectorUrl]];
     SPHttpMethod methodType = [self getMethodType];
-    SPProtocol protocolType = [self getProtocolType];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([url isEqual: @""]) {
             return;
@@ -83,14 +85,12 @@
         
         // Ensures the application won't crash with a bad URL
         @try {
-            [self->_tracker.emitter setUrlEndpoint:url];
+            self->_tracker.network.endpoint = url;
+            self->_tracker.network.method = methodType;
         }
         @catch (NSException *exception) {
             return;
         }
-        
-        [self->_tracker.emitter setHttpMethod:methodType];
-        [self->_tracker.emitter setProtocol:protocolType];
         
         // Track all types of events and update count of total number of tracked events
         self->_madeCounter += [DemoUtils trackAll:self->_tracker];
@@ -99,19 +99,19 @@
 
 - (void) updateMetrics {
     [_madeLabel setText:[NSString stringWithFormat:@"Made: %lld", _madeCounter]];
-    [_dbCountLabel setText:[NSString stringWithFormat:@"DB Count: %lu", (unsigned long)[_tracker.emitter getDbCount]]];
-    [_sessionCountLabel setText:[NSString stringWithFormat:@"Session Count: %lu", (unsigned long)[_tracker getSessionIndex]]];
-    [_isRunningLabel setText:[NSString stringWithFormat:@"Running: %s", [_tracker.emitter getSendingStatus] ? "yes" : "no"]];
-    [_isBackgroundLabel setText:[NSString stringWithFormat:@"Background: %s", [_tracker getInBackground] ? "yes" : "no"]];
+    [_dbCountLabel setText:[NSString stringWithFormat:@"DB Count: %lu", (unsigned long)_tracker.emitter.dbCount]];
+    [_sessionCountLabel setText:[NSString stringWithFormat:@"Session Count: %lu", (unsigned long)_tracker.session.sessionIndex]];
+    [_isRunningLabel setText:[NSString stringWithFormat:@"Running: %s", _tracker.emitter.isSending ? "yes" : "no"]];
+    [_isBackgroundLabel setText:[NSString stringWithFormat:@"Background: %s", _tracker.session.isInBackground ? "yes" : "no"]];
     [_sentCountLabel setText:[NSString stringWithFormat:@"Sent: %lu", (unsigned long)_sentCounter]];
 }
 
 - (void) action {
     BOOL tracking = _trackingOnOff.selectedSegmentIndex == 0 ? YES : NO;
-    if (tracking && ![_tracker getIsTracking]) {
-        [_tracker resumeEventTracking];
-    } else if ([_tracker getIsTracking]) {
-        [_tracker pauseEventTracking];
+    if (!tracking && _tracker.isTracking) {
+        [_tracker pause];
+    } else if (tracking && !_tracker.isTracking) {
+        [_tracker resume];
     }
 }
 
@@ -136,32 +136,24 @@ static NSString *const kNamespace = @"DemoAppNamespace";
 
 // Tracker Setup & Init
 
-- (SPTracker *) getTrackerWithUrl:(NSString *)url_
-                           method:(enum SPHttpMethod)method_ {
-    SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-        [builder setUrlEndpoint:url_];
-        [builder setHttpMethod:method_];
-        [builder setCallback:self];
-        [builder setEmitRange:500];
-        [builder setEmitThreadPoolSize:20];
-        [builder setByteLimitPost:52000];
-    }];
-    
-    SPSubject *subject = [[SPSubject alloc] initWithPlatformContext:YES andGeoContext:NO];
-    
-    SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
-        [builder setEmitter:emitter];
-        [builder setAppId:kAppId];
-        [builder setTrackerNamespace:kNamespace];
-        [builder setBase64Encoded:false];
-        [builder setSessionContext:YES];
-        [builder setSubject:subject];
-        [builder setGlobalContextGenerators:@{
-            @"rulesetExampleTag": [self rulesetGlobalContextExample],
-            @"staticExampleTag": [self staticGlobalContextExample],
-        }];
-    }];
-    return tracker;
+- (id<SPTrackerController>)trackerWithUrl:(NSString *)url method:(enum SPHttpMethod)method {
+    SPNetworkConfiguration *network = [[SPNetworkConfiguration alloc] initWithEndpoint:url method:method];
+    SPEmitterConfiguration *emitter = [[SPEmitterConfiguration alloc] init];
+    emitter.emitRange = 500;
+    emitter.threadPoolSize = 20;
+    emitter.byteLimitPost = 52000;
+    SPTrackerConfiguration *tracker = [[SPTrackerConfiguration alloc] init];
+    tracker.platformContext = YES;
+    tracker.geoLocationContext = YES;
+    tracker.appId = kAppId;
+    tracker.base64Encoding = YES;
+    tracker.sessionContext = YES;
+    SPGlobalContextsConfiguration *globalContexts = [[SPGlobalContextsConfiguration alloc] init];
+    globalContexts.contextGenerators = @{
+        @"rulesetExampleTag": [self rulesetGlobalContextExample],
+        @"staticExampleTag": [self staticGlobalContextExample],
+    }.mutableCopy;
+    return [SPSnowplow createTrackerWithNamespace:kNamespace network:network configurations:@[emitter, tracker, globalContexts]];
 }
 
 - (SPGlobalContext *)rulesetGlobalContextExample {

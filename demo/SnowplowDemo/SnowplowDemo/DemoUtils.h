@@ -21,16 +21,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SPTrackerController.h"
 
-@class SPTracker;
 @class SPPayload;
 
 @interface DemoUtils : NSObject
 
-/**
- * Tracks all types of events with a Tracker
- * @param tracker_ The tracker to use for the Tracking
- */
-+ (int)trackAll:(SPTracker *)tracker_;
++ (int)trackAll:(id<SPTrackerController>)tracker_;
 
 @end
