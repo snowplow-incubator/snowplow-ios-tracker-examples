@@ -87,7 +87,7 @@ class DemoUtils {
 
     static func trackPushNotificationWithTracker(_ tracker: TrackerController) -> Int {
         let attachments = [["identifier": "testidentifier",
-                            "url": "testurl",
+                            "URL": "testurl",
                             "type": "testtype"]]
 
         var userInfo = Dictionary<String, Any>()
