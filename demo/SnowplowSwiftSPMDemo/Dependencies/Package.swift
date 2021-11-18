@@ -13,9 +13,9 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(name: "SnowplowTracker", url: "https://github.com/snowplow/snowplow-objc-tracker", .branch("master")),
+        // .package(name: "SnowplowTracker", url: "https://github.com/snowplow/snowplow-objc-tracker", .branch("master")),
         // .package(name: "SnowplowTracker", path: "../../../../snowplow-objc-tracker"),
-        // .package(name: "SnowplowTracker", path: "../../../.."),
+        .package(name: "SnowplowTracker", path: "../../../.."),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.

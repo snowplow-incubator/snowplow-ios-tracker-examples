@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     .sound(sound)
                     .launchImageName(requestContent.launchImageName)
                     .userInfo(userInfo)
-                    .attachments(SPUtilities.convert(request.content.attachments))
+                    .attachments(request.content.attachments)
                 
                 let formatter = DateFormatter()
                 formatter.dateStyle = .medium
@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 formatter.locale = Locale(identifier: "en_US")
                 let dateString = formatter.string(from: response.notification.date)
                 
-                let event = PushNotification(date: dateString, action: actionIdentifier, trigger: SPUtilities.getTriggerType(request.trigger), category: requestContent.categoryIdentifier, thread: requestContent.threadIdentifier, notification: content)
+                let event = PushNotification(date: dateString, action: actionIdentifier, notificationTrigger: request.trigger, category: requestContent.categoryIdentifier, thread: requestContent.threadIdentifier, notification: content)
                 
                 //print(String(data: try! JSONSerialization.data(withJSONObject: event!.getPayload().getAsDictionary(), options: .prettyPrinted), encoding: .utf8 )!)
                 rootViewController.tracker?.track(event)

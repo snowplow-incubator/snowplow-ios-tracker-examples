@@ -54,10 +54,8 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/SnowplowSwiftDemoWatch WatchKit App">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3D9BDDE237AC0E3009B310A"
@@ -65,7 +63,7 @@
             BlueprintName = "SnowplowSwiftDemoWatch WatchKit App"
             ReferencedContainer = "container:SnowplowSwiftDemo.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -73,10 +71,8 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/SnowplowSwiftDemoWatch WatchKit App">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B3D9BDDE237AC0E3009B310A"
@@ -84,16 +80,7 @@
             BlueprintName = "SnowplowSwiftDemoWatch WatchKit App"
             ReferencedContainer = "container:SnowplowSwiftDemo.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B3D9BDDE237AC0E3009B310A"
-            BuildableName = "SnowplowSwiftDemoWatch WatchKit App.app"
-            BlueprintName = "SnowplowSwiftDemoWatch WatchKit App"
-            ReferencedContainer = "container:SnowplowSwiftDemo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

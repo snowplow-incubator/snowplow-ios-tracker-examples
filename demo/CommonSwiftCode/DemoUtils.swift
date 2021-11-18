@@ -30,7 +30,8 @@ class DemoUtils {
         + self.trackScreenViewWithTracker(tracker)
         + self.trackTimingWithCategoryWithTracker(tracker)
         + self.trackEcommerceTransactionWithTracker(tracker)
-        + self.trackPushNotificationWithTracker(tracker)
+        + self.trackDeepLinkReceivedWithTracker(tracker)
+        + self.trackMessageNotificationWithTracker(tracker)
     }
     
     static func trackStructuredEventWithTracker(_ tracker: TrackerController) -> Int {
@@ -84,30 +85,26 @@ class DemoUtils {
         tracker.track(event)
         return 2
     }
-
-    static func trackPushNotificationWithTracker(_ tracker: TrackerController) -> Int {
-        let attachments = [["identifier": "testidentifier",
-                            "url": "testurl",
-                            "type": "testtype"]]
-
-        var userInfo = Dictionary<String, Any>()
-        userInfo["test"] = "test"
-
-        let content = NotificationContent(title: "title", body: "body", badge: 5)
-            .subtitle("subtitle")
-            .sound("sound")
-            .launchImageName("launchImageName")
-            .userInfo(userInfo)
-            .attachments(attachments)
-        
-        let event = PushNotification(
-            date: "date",
-            action: "action",
-            trigger: "PUSH",
-            category: "category",
-            thread: "thread",
-            notification: content)
-
+    
+    static func trackDeepLinkReceivedWithTracker(_ tracker: TrackerController) -> Int {
+        let event = DeepLinkReceived(url: "https://snowplowanalytics.com")
+            .referrer("https://snowplowanalytics.com/referrer")
+        tracker.track(event)
+        return 1
+    }
+    
+    static func trackMessageNotificationWithTracker(_ tracker: TrackerController) -> Int {
+        let event = MessageNotification(title: "title", body: "body", trigger: .push)
+            .notificationTimestamp("2020-12-31T15:59:60-08:00")
+            .action("action")
+            .bodyLocKey("loc key")
+            .bodyLocArgs(["loc arg1", "loc arg2"])
+            .sound("chime.mp3")
+            .notificationCount(9)
+            .category("category1")
+            .attachments([
+                MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplowanalytics.com")
+            ]);
         tracker.track(event)
         return 1
     }
