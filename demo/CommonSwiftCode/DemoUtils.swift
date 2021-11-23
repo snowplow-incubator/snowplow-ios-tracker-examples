@@ -95,7 +95,7 @@ class DemoUtils {
     
     static func trackMessageNotificationWithTracker(_ tracker: TrackerController) -> Int {
         let event = MessageNotification(title: "title", body: "body", trigger: .push)
-            .notificationTimestamp("2020-12-31T15:59:60-08:00")
+            .notificationTimestamp("2021-10-18T10:16:08.008Z")
             .action("action")
             .bodyLocKey("loc key")
             .bodyLocArgs(["loc arg1", "loc arg2"])
