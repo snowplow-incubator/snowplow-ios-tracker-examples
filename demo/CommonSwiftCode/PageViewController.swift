@@ -68,9 +68,12 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             .emitRange(500)
             .requestCallback(self)
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
-        
-        let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig])
-        
+        let sessionConfig = SessionConfiguration(foregroundTimeoutInSeconds: 15, backgroundTimeoutInSeconds: 15)
+            .onSessionStateUpdate { session in
+                print("SessionState: previous: \(String(describing:session.previousSessionId)) - id: \(session.sessionId) - index: \(session.sessionIndex) - userID: \(session.userId) - firstEventID: \(session.firstEventId)")
+            }
+        let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
+
         return tracker
     }
     
