@@ -63,10 +63,13 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             .diagnosticAutotracking(true)
             .logLevel(.verbose)
             .loggerDelegate(self)
+        var customRetryRules = [Int:Bool]()
+        customRetryRules[502] = false
         let emitterConfig = EmitterConfiguration()
             .eventStore(eventStore)
             .emitRange(500)
             .requestCallback(self)
+            .customRetryForStatusCodes(customRetryRules)
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
         
         let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig])
