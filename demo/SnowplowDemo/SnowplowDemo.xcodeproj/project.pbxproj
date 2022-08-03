@@ -16,6 +16,14 @@
 		043172921B7365D4008A927D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043172901B7365D4008A927D /* LaunchScreen.xib */; };
 		0431729E1B7365D4008A927D /* SnowplowDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431729D1B7365D4008A927D /* SnowplowDemoTests.m */; };
 		043172A91B7366B8008A927D /* DemoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 043172A81B7366B8008A927D /* DemoUtils.m */; };
+		3802C0BCE5C455858469F265 /* Pods_Analytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145683280944E5A82E7F998D /* Pods_Analytics.framework */; };
+		B10C0221289B2C0600770C3E /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10C0220289B2C0600770C3E /* ShareViewController.swift */; };
+		B10C0224289B2C0600770C3E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B10C0222289B2C0600770C3E /* MainInterface.storyboard */; };
+		B10C0228289B2C0600770C3E /* SnowPlowDemoShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B10C021E289B2C0600770C3E /* SnowPlowDemoShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B10C0237289B2F8500770C3E /* Analytics.h in Headers */ = {isa = PBXBuildFile; fileRef = B10C0236289B2F8500770C3E /* Analytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B10C023A289B2F8500770C3E /* Analytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B10C0234289B2F8500770C3E /* Analytics.framework */; };
+		B10C023B289B2F8500770C3E /* Analytics.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B10C0234289B2F8500770C3E /* Analytics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B10C0240289B2F9E00770C3E /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10C022D289B2CC600770C3E /* Tracker.swift */; };
 		E134DAD3C64350D5745090BD /* Pods_SnowplowDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3710BBFEF122A6658C1C43E7 /* Pods_SnowplowDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +35,53 @@
 			remoteGlobalIDString = 0431727A1B7365D4008A927D;
 			remoteInfo = SnowplowDemo;
 		};
+		B10C0226289B2C0600770C3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043172731B7365D3008A927D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B10C021D289B2C0600770C3E;
+			remoteInfo = SnowPlowDemoShareExtension;
+		};
+		B10C0238289B2F8500770C3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043172731B7365D3008A927D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B10C0233289B2F8500770C3E;
+			remoteInfo = Analytics;
+		};
+		B10C0241289B2FB900770C3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 043172731B7365D3008A927D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B10C0233289B2F8500770C3E;
+			remoteInfo = Analytics;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B10C0229289B2C0600770C3E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B10C0228289B2C0600770C3E /* SnowPlowDemoShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10C023C289B2F8500770C3E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B10C023B289B2F8500770C3E /* Analytics.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0431727B1B7365D4008A927D /* SnowplowDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnowplowDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,9 +100,19 @@
 		0431729D1B7365D4008A927D /* SnowplowDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnowplowDemoTests.m; sourceTree = "<group>"; };
 		043172A71B7366A6008A927D /* DemoUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoUtils.h; sourceTree = "<group>"; };
 		043172A81B7366B8008A927D /* DemoUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoUtils.m; sourceTree = "<group>"; };
+		145683280944E5A82E7F998D /* Pods_Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		247B73C874DCE824C728DE00 /* Pods-Analytics.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Analytics.debug.xcconfig"; path = "Target Support Files/Pods-Analytics/Pods-Analytics.debug.xcconfig"; sourceTree = "<group>"; };
 		3710BBFEF122A6658C1C43E7 /* Pods_SnowplowDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowplowDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EE35E0809E1E3ADB90EE5D8 /* Pods-Analytics.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Analytics.release.xcconfig"; path = "Target Support Files/Pods-Analytics/Pods-Analytics.release.xcconfig"; sourceTree = "<group>"; };
 		66EA3CD278153BD0908536CA /* Pods-SnowplowDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowplowDemo.debug.xcconfig"; path = "Target Support Files/Pods-SnowplowDemo/Pods-SnowplowDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		740DCC07B75E8AD9FD1BB20D /* Pods-SnowplowDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowplowDemo.release.xcconfig"; path = "Target Support Files/Pods-SnowplowDemo/Pods-SnowplowDemo.release.xcconfig"; sourceTree = "<group>"; };
+		B10C021E289B2C0600770C3E /* SnowPlowDemoShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SnowPlowDemoShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10C0220289B2C0600770C3E /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		B10C0223289B2C0600770C3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		B10C0225289B2C0600770C3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B10C022D289B2CC600770C3E /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
+		B10C0234289B2F8500770C3E /* Analytics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Analytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10C0236289B2F8500770C3E /* Analytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Analytics.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E134DAD3C64350D5745090BD /* Pods_SnowplowDemo.framework in Frameworks */,
+				B10C023A289B2F8500770C3E /* Analytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +129,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10C021B289B2C0600770C3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10C0231289B2F8500770C3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3802C0BCE5C455858469F265 /* Pods_Analytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +155,8 @@
 			children = (
 				0431727D1B7365D4008A927D /* SnowplowDemo */,
 				0431729A1B7365D4008A927D /* SnowplowDemoTests */,
+				B10C021F289B2C0600770C3E /* SnowPlowDemoShareExtension */,
+				B10C0235289B2F8500770C3E /* Analytics */,
 				0431727C1B7365D4008A927D /* Products */,
 				42FEEE7C5611653C7A8F00D8 /* Pods */,
 				732484D89E64AED2D558B48A /* Frameworks */,
@@ -86,6 +168,8 @@
 			children = (
 				0431727B1B7365D4008A927D /* SnowplowDemo.app */,
 				043172971B7365D4008A927D /* SnowplowDemoTests.xctest */,
+				B10C021E289B2C0600770C3E /* SnowPlowDemoShareExtension.appex */,
+				B10C0234289B2F8500770C3E /* Analytics.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +223,8 @@
 			children = (
 				66EA3CD278153BD0908536CA /* Pods-SnowplowDemo.debug.xcconfig */,
 				740DCC07B75E8AD9FD1BB20D /* Pods-SnowplowDemo.release.xcconfig */,
+				247B73C874DCE824C728DE00 /* Pods-Analytics.debug.xcconfig */,
+				4EE35E0809E1E3ADB90EE5D8 /* Pods-Analytics.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -147,11 +233,42 @@
 			isa = PBXGroup;
 			children = (
 				3710BBFEF122A6658C1C43E7 /* Pods_SnowplowDemo.framework */,
+				145683280944E5A82E7F998D /* Pods_Analytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B10C021F289B2C0600770C3E /* SnowPlowDemoShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				B10C0220289B2C0600770C3E /* ShareViewController.swift */,
+				B10C0222289B2C0600770C3E /* MainInterface.storyboard */,
+				B10C0225289B2C0600770C3E /* Info.plist */,
+			);
+			path = SnowPlowDemoShareExtension;
+			sourceTree = "<group>";
+		};
+		B10C0235289B2F8500770C3E /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				B10C0236289B2F8500770C3E /* Analytics.h */,
+				B10C022D289B2CC600770C3E /* Tracker.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B10C022F289B2F8500770C3E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10C0237289B2F8500770C3E /* Analytics.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		0431727A1B7365D4008A927D /* SnowplowDemo */ = {
@@ -163,10 +280,14 @@
 				043172781B7365D4008A927D /* Frameworks */,
 				043172791B7365D4008A927D /* Resources */,
 				835E31B75ADCE1EE0BD101FD /* [CP] Embed Pods Frameworks */,
+				B10C0229289B2C0600770C3E /* Embed App Extensions */,
+				B10C023C289B2F8500770C3E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B10C0227289B2C0600770C3E /* PBXTargetDependency */,
+				B10C0239289B2F8500770C3E /* PBXTargetDependency */,
 			);
 			name = SnowplowDemo;
 			productName = SnowplowDemo;
@@ -191,12 +312,50 @@
 			productReference = 043172971B7365D4008A927D /* SnowplowDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B10C021D289B2C0600770C3E /* SnowPlowDemoShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B10C022C289B2C0600770C3E /* Build configuration list for PBXNativeTarget "SnowPlowDemoShareExtension" */;
+			buildPhases = (
+				B10C021A289B2C0600770C3E /* Sources */,
+				B10C021B289B2C0600770C3E /* Frameworks */,
+				B10C021C289B2C0600770C3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B10C0242289B2FB900770C3E /* PBXTargetDependency */,
+			);
+			name = SnowPlowDemoShareExtension;
+			productName = SnowPlowDemoShareExtension;
+			productReference = B10C021E289B2C0600770C3E /* SnowPlowDemoShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		B10C0233289B2F8500770C3E /* Analytics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B10C023F289B2F8500770C3E /* Build configuration list for PBXNativeTarget "Analytics" */;
+			buildPhases = (
+				DC42D459AFDFEF80773163BE /* [CP] Check Pods Manifest.lock */,
+				B10C022F289B2F8500770C3E /* Headers */,
+				B10C0230289B2F8500770C3E /* Sources */,
+				B10C0231289B2F8500770C3E /* Frameworks */,
+				B10C0232289B2F8500770C3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Analytics;
+			productName = Analytics;
+			productReference = B10C0234289B2F8500770C3E /* Analytics.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		043172731B7365D3008A927D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = "Snowplow Analytics Ltd";
 				TargetAttributes = {
@@ -206,6 +365,14 @@
 					043172961B7365D4008A927D = {
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = 0431727A1B7365D4008A927D;
+					};
+					B10C021D289B2C0600770C3E = {
+						CreatedOnToolsVersion = 13.4.1;
+						ProvisioningStyle = Automatic;
+					};
+					B10C0233289B2F8500770C3E = {
+						CreatedOnToolsVersion = 13.4.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -224,6 +391,8 @@
 			targets = (
 				0431727A1B7365D4008A927D /* SnowplowDemo */,
 				043172961B7365D4008A927D /* SnowplowDemoTests */,
+				B10C021D289B2C0600770C3E /* SnowPlowDemoShareExtension */,
+				B10C0233289B2F8500770C3E /* Analytics */,
 			);
 		};
 /* End PBXProject section */
@@ -240,6 +409,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		043172951B7365D4008A927D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10C021C289B2C0600770C3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10C0224289B2C0600770C3E /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10C0232289B2F8500770C3E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -291,6 +475,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DC42D459AFDFEF80773163BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Analytics-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -314,6 +520,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B10C021A289B2C0600770C3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10C0221289B2C0600770C3E /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B10C0230289B2F8500770C3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B10C0240289B2F9E00770C3E /* Tracker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -321,6 +543,21 @@
 			isa = PBXTargetDependency;
 			target = 0431727A1B7365D4008A927D /* SnowplowDemo */;
 			targetProxy = 043172981B7365D4008A927D /* PBXContainerItemProxy */;
+		};
+		B10C0227289B2C0600770C3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B10C021D289B2C0600770C3E /* SnowPlowDemoShareExtension */;
+			targetProxy = B10C0226289B2C0600770C3E /* PBXContainerItemProxy */;
+		};
+		B10C0239289B2F8500770C3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B10C0233289B2F8500770C3E /* Analytics */;
+			targetProxy = B10C0238289B2F8500770C3E /* PBXContainerItemProxy */;
+		};
+		B10C0242289B2FB900770C3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B10C0233289B2F8500770C3E /* Analytics */;
+			targetProxy = B10C0241289B2FB900770C3E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -339,6 +576,14 @@
 				043172911B7365D4008A927D /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		B10C0222289B2C0600770C3E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B10C0223289B2C0600770C3E /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -509,6 +754,148 @@
 			};
 			name = Release;
 		};
+		B10C022A289B2C0600770C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SnowPlowDemoShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SnowPlowDemoShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Snowplow Analytics Ltd. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.snowplowanalytics.SnowplowDemo.SnowPlowDemoShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B10C022B289B2C0600770C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SnowPlowDemoShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SnowPlowDemoShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Snowplow Analytics Ltd. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.snowplowanalytics.SnowplowDemo.SnowPlowDemoShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B10C023D289B2F8500770C3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 247B73C874DCE824C728DE00 /* Pods-Analytics.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Snowplow Analytics Ltd. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.snowplowanalytics.Analytics;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B10C023E289B2F8500770C3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EE35E0809E1E3ADB90EE5D8 /* Pods-Analytics.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Snowplow Analytics Ltd. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.snowplowanalytics.Analytics;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -535,6 +922,24 @@
 			buildConfigurations = (
 				043172A51B7365D4008A927D /* Debug */,
 				043172A61B7365D4008A927D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B10C022C289B2C0600770C3E /* Build configuration list for PBXNativeTarget "SnowPlowDemoShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10C022A289B2C0600770C3E /* Debug */,
+				B10C022B289B2C0600770C3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B10C023F289B2F8500770C3E /* Build configuration list for PBXNativeTarget "Analytics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10C023D289B2F8500770C3E /* Debug */,
+				B10C023E289B2F8500770C3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
