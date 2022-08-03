@@ -7,3 +7,6 @@ target 'SnowplowDemo' do
     pod 'SnowplowTracker', :path=> '../../../'
 end
 
+target 'Analytics' do
+  pod 'SnowplowTracker', :path=> '../../../'
+end
