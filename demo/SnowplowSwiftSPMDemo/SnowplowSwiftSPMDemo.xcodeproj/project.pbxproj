@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B07CDAA287709A500E510D6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B07CDA9287709A500E510D6 /* WebViewController.swift */; };
 		CEF26A06243CC5630051C2EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF269F6243CC5630051C2EB /* LaunchScreen.storyboard */; };
 		CEF26A07243CC5630051C2EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF269F8243CC5630051C2EB /* Main.storyboard */; };
 		CEF26A08243CC5630051C2EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF269FA243CC5630051C2EB /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B07CDA9287709A500E510D6 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ../../CommonSwiftCode/WebViewController.swift; sourceTree = "<group>"; };
 		CEF269DD243CC5440051C2EB /* SnowplowSwiftSPMDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnowplowSwiftSPMDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF269EE243CC5450051C2EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF269F7243CC5630051C2EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				CEF26A00243CC5630051C2EB /* Assets.xcassets */,
 				CEF269F5243CC5630051C2EB /* Base.lproj */,
 				CEF269FD243CC5630051C2EB /* SnowplowSwiftDemo.xcdatamodeld */,
+				6B07CDA9287709A500E510D6 /* WebViewController.swift */,
 			);
 			path = SnowplowSwiftSPMDemo;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				CEF26A0F243CC5630051C2EB /* MetricsViewController.swift in Sources */,
 				CEF26A08243CC5630051C2EB /* AppDelegate.swift in Sources */,
 				CEF26A0C243CC5630051C2EB /* DemoViewController.swift in Sources */,
+				6B07CDAA287709A500E510D6 /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +343,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V487J8L84E;
 				INFOPLIST_FILE = SnowplowSwiftSPMDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -358,6 +363,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V487J8L84E;
 				INFOPLIST_FILE = SnowplowSwiftSPMDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

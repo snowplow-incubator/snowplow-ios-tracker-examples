@@ -137,6 +137,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     lazy var orderedViewControllers: [UIViewController] = {
         return [self.newVc(viewController: "demo"),
                 self.newVc(viewController: "metrics"),
+                self.newVc(viewController: "web"),
                 self.newVc(viewController: "additional")]
     }()
 
