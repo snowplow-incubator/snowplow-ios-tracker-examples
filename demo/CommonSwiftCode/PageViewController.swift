@@ -76,9 +76,17 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     
     func remoteTracker(_ url: String, isRefresh: Bool, callback: @escaping (TrackerController?) -> Void) {
         let remoteConfig = RemoteConfiguration(endpoint: url, method: .get)
-        let successCallback: ([String]?) -> Void = { _ in
+        let successCallback: ([String]?, ConfigurationState) -> Void = { _, state in
             let tracker = Snowplow.defaultTracker()
             tracker?.emitter.requestCallback = self
+            switch state {
+            case .cached:
+                print("Configuration loaded from cache")
+            case .fetched:
+                print("Configuration downloaded from the remote endpoint")
+            default:
+                print("Configuration retrieved in other ways – should not happen")
+            }
             callback(tracker)
         }
         if isRefresh {
