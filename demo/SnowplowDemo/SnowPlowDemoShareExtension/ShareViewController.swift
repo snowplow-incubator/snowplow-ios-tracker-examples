@@ -8,7 +8,6 @@
 
 import UIKit
 import Social
-import Analytics
 
 class ShareViewController: SLComposeServiceViewController {
 
@@ -19,7 +18,7 @@ class ShareViewController: SLComposeServiceViewController {
 
     override func didSelectPost() {
         // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
-        Tracker.shared.track(event: "share-extension-did-post")
+        Tracker.shared.trackExtensionUsage(content: contentText ?? "No content")
         showLoading()
 
         // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
