@@ -7,3 +7,6 @@ target 'SnowplowDemo' do
     pod 'SnowplowTracker', :path=> '../../../'
 end
 
+target 'SnowPlowDemoShareExtension' do
+  pod 'SnowplowTracker', :path=> '../../../'
+end
