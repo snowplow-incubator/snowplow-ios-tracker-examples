@@ -36,76 +36,74 @@ class DemoUtils {
     
     static func trackStructuredEventWithTracker(_ tracker: TrackerController) -> Int {
         let event = Structured(category: "DemoCategory", action: "DemoAction")
-            .label("DemoLabel")
-            .property("DemoProperty much longer than the expected value.")
-            .value(5)
-        tracker.track(event)
+        event.label = "DemoLabel"
+        event.property = "DemoProperty much longer than the expected value."
+        event.value = 5
+        _ = tracker.track(event)
         return 1
     }
     
     static func trackSelfDescribingEventWithTracker(_ tracker: TrackerController) -> Int {
         let data = ["targetUrl": "http://a-target-url.com" as NSObject];
         let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
-        tracker.track(event)
+        _ = tracker.track(event)
         return 1
     }
     
     static func trackScreenViewWithTracker(_ tracker: TrackerController) -> Int {
         let event = ScreenView(name: "DemoScreenName", screenId: UUID())
-        tracker.track(event)
+        _ = tracker.track(event)
         return 1
     }
     
     static func trackTimingWithCategoryWithTracker(_ tracker: TrackerController) -> Int {
         let event = Timing(category: "DemoTimingCategory", variable: "DemoTimingVariable", timing: 5)
-            .label("DemoTimingLabel")
-        tracker.track(event)
+        event.label = "DemoTimingLabel"
+        _ = tracker.track(event)
         return 1
     }
     
     static func trackEcommerceTransactionWithTracker(_ tracker: TrackerController) -> Int {
         let transactionID = "6a8078be"
         
-        let itemArray = [
-            EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
-                .name("DemoItemName")
-                .category("DemoItemCategory")
-                .currency("USD")
-        ]
+        let item = EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
+        item.name = "DemoItemName"
+        item.category = "DemoItemCategory"
+        item.currency = "USD"
         
-        let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
-            .affiliation("DemoTransactionAffiliation")
-            .taxValue(10)
-            .shipping(15)
-            .city("Boston")
-            .state("Massachisetts")
-            .country("USA")
-            .currency("USD")
+        let event = Ecommerce(orderId: transactionID, totalValue: 350, items: [item])
+        event.affiliation = "DemoTransactionAffiliation"
+        event.taxValue = 10
+        event.shipping = 15
+        event.city = "Boston"
+        event.state = "Massachisetts"
+        event.country = "USA"
+        event.currency = "USD"
 
-        tracker.track(event)
+        _ = tracker.track(event)
         return 2
     }
     
     static func trackDeepLinkReceivedWithTracker(_ tracker: TrackerController) -> Int {
         let event = DeepLinkReceived(url: "https://snowplowanalytics.com")
-            .referrer("https://snowplowanalytics.com/referrer")
-        tracker.track(event)
+        event.referrer = "https://snowplowanalytics.com/referrer"
+        _ = tracker.track(event)
         return 1
     }
     
     static func trackMessageNotificationWithTracker(_ tracker: TrackerController) -> Int {
         let event = MessageNotification(title: "title", body: "body", trigger: .push)
-            .notificationTimestamp("2021-10-18T10:16:08.008Z")
-            .action("action")
-            .bodyLocKey("loc key")
-            .bodyLocArgs(["loc arg1", "loc arg2"])
-            .sound("chime.mp3")
-            .notificationCount(9)
-            .category("category1")
-            .attachments([
-                MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplowanalytics.com")
-            ]);
-        tracker.track(event)
+        event.notificationTimestamp = "2021-10-18T10:16:08.008Z"
+        event.action = "action"
+        event.bodyLocKey = "loc key"
+        event.bodyLocArgs = ["loc arg1", "loc arg2"]
+        event.sound = "chime.mp3"
+        event.notificationCount = 9
+        event.category = "category1"
+        event.attachments = [
+            MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplowanalytics.com")
+        ]
+        _ = tracker.track(event)
         return 1
     }
 }

@@ -25,7 +25,7 @@ import SnowplowTracker
 
 class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, RequestCallback {
 
-    var tracker : TrackerController!
+    var tracker : TrackerController?
     var madeCounter : Int = 0
     var sentCounter : Int = 0
     var uri : String = ""
@@ -40,41 +40,39 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
     // Tracker setup and init
 
-    func initTracker(_ url: String, method: HttpMethodOptions) -> TrackerController {
-        let eventStore = SQLiteEventStore(namespace: kNamespace);
-        let network = DefaultNetworkConnection.build { (builder) in
-            builder.setUrlEndpoint(url)
-            builder.setHttpMethod(method)
-            builder.setEmitThreadPoolSize(20)
-            builder.setByteLimitPost(52000)
-        }
+    func initTracker(_ url: String, method: HttpMethodOptions) -> TrackerController? {
+        let network = DefaultNetworkConnection(
+            urlString: url,
+            httpMethod: method
+        )
+        network.emitThreadPoolSize = 20
+        network.byteLimitPost = 52000
         let networkConfig = NetworkConfiguration(networkConnection: network)
         let trackerConfig = TrackerConfiguration()
-            .base64Encoding(false)
-            .sessionContext(true)
-            .platformContext(true)
-            .geoLocationContext(false)
-            .lifecycleAutotracking(true)
-            .screenViewAutotracking(true)
-            .screenContext(true)
-            .applicationContext(true)
-            .exceptionAutotracking(true)
-            .installAutotracking(true)
-            .diagnosticAutotracking(true)
-            .logLevel(.verbose)
-            .loggerDelegate(self)
+        trackerConfig.base64Encoding = false
+        trackerConfig.sessionContext = true
+        trackerConfig.platformContext = true
+        trackerConfig.geoLocationContext = false
+        trackerConfig.lifecycleAutotracking = true
+        trackerConfig.screenViewAutotracking = true
+        trackerConfig.screenContext = true
+        trackerConfig.applicationContext = true
+        trackerConfig.exceptionAutotracking = true
+        trackerConfig.installAutotracking = true
+        trackerConfig.diagnosticAutotracking = true
+        trackerConfig.logLevel = .verbose
+        trackerConfig.loggerDelegate = self
         var customRetryRules = [Int:Bool]()
         customRetryRules[502] = false
         let emitterConfig = EmitterConfiguration()
-            .eventStore(eventStore)
-            .emitRange(500)
-            .requestCallback(self)
-            .customRetryForStatusCodes(customRetryRules)
+        emitterConfig.emitRange = 500
+        emitterConfig.requestCallback = self
+        emitterConfig.customRetryForStatusCodes = customRetryRules
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
         let sessionConfig = SessionConfiguration(foregroundTimeoutInSeconds: 15, backgroundTimeoutInSeconds: 15)
-            .onSessionStateUpdate { session in
-                print("SessionState: previous: \(String(describing:session.previousSessionId)) - id: \(session.sessionId) - index: \(session.sessionIndex) - userID: \(session.userId) - firstEventID: \(session.firstEventId)")
-            }
+        sessionConfig.onSessionStateUpdate = { session in
+            print("SessionState: previous: \(String(describing:session.previousSessionId)) - id: \(session.sessionId) - index: \(session.sessionIndex) - userID: \(session.userId) - firstEventID: \(String(describing: session.firstEventId))")
+        }
         let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
 
         return tracker
@@ -84,7 +82,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         let remoteConfig = RemoteConfiguration(endpoint: url, method: .get)
         let successCallback: ([String]?, ConfigurationState) -> Void = { _, state in
             let tracker = Snowplow.defaultTracker()
-            tracker?.emitter.requestCallback = self
+            tracker?.emitter?.requestCallback = self
             switch state {
             case .cached:
                 print("Configuration loaded from cache")

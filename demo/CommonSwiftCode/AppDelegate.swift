@@ -50,15 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
                 let request = response.notification.request
                 let requestContent = request.content
-                let userInfo = requestContent.userInfo
-                let sound = userInfo["sound"] as? String ?? "unknown"
+                let userInfo = requestContent.userInfo as? [String : NSObject]
+                let sound = userInfo?["sound"] as? String ?? "unknown"
 
                 let content = NotificationContent(title: requestContent.title, body: requestContent.body, badge: requestContent.badge!)
-                    .subtitle(requestContent.subtitle)
-                    .sound(sound)
-                    .launchImageName(requestContent.launchImageName)
-                    .userInfo(userInfo)
-                    .attachments(request.content.attachments)
+                content.subtitle = requestContent.subtitle
+                content.sound = sound
+                content.launchImageName = requestContent.launchImageName
+                content.userInfo = userInfo
+                content.attachments = request.content.attachments
                 
                 let formatter = DateFormatter()
                 formatter.dateStyle = .medium
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let event = PushNotification(date: dateString, action: actionIdentifier, notificationTrigger: request.trigger, category: requestContent.categoryIdentifier, thread: requestContent.threadIdentifier, notification: content)
                 
                 //print(String(data: try! JSONSerialization.data(withJSONObject: event!.getPayload().getAsDictionary(), options: .prettyPrinted), encoding: .utf8 )!)
-                rootViewController.tracker?.track(event)
+                _ = rootViewController.tracker?.track(event)
             }
             completionHandler()
         default:
