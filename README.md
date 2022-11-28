@@ -6,4 +6,6 @@ A repository for examples applications using the Snowplow iOS Tracker
 
 Demo apps used for testing:
 
-- [Swift SPM app](demo)
+- [Swift SPM app](demo/SnowplowSwiftSPMDemo/)
+- [Swift Cocoapods app](demo/SnowplowSwiftCocoapodsDemo/)
+- [ObjC Cocoapods app](demo/SnowplowObjCDemo/)
