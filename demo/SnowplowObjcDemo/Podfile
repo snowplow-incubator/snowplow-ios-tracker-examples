@@ -1,0 +1,12 @@
+platform :ios, '11.0'
+use_frameworks!
+
+workspace 'SnowplowDemo.xcworkspace'
+
+target 'SnowplowDemo' do
+  pod 'SnowplowTracker', :path=> '../../../'
+end
+
+target 'SnowPlowDemoShareExtension' do
+  pod 'SnowplowTracker', :path=> '../../../'
+end

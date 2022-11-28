@@ -29,30 +29,30 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     let kAppId     = "DemoAppId"
     let kNamespace = "DemoAppNamespace"
     
-    func getTracker(_ url: String, method: HttpMethodOptions) -> TrackerController {
+    func getTracker(_ url: String, method: HttpMethodOptions) -> TrackerController? {
         let networkConfig = NetworkConfiguration(endpoint: url, method: method)
         let emitterConfig = EmitterConfiguration()
-            .byteLimitPost(52000)
-            .threadPoolSize(20)
-            .emitRange(500)
-            .requestCallback(self)
+        emitterConfig.byteLimitPost = 52000
+        emitterConfig.threadPoolSize = 20
+        emitterConfig.emitRange = 500
+        emitterConfig.requestCallback = self
         let trackerConfig = TrackerConfiguration()
-            .appId(kAppId)
-            .base64Encoding(false)
-            .sessionContext(true)
-            .platformContext(true)
-            .geoLocationContext(false)
-            .lifecycleAutotracking(true)
-            .screenViewAutotracking(true)
-            .screenContext(true)
-            .applicationContext(true)
-            .exceptionAutotracking(true)
-            .installAutotracking(true)
+        trackerConfig.appId = kAppId
+        trackerConfig.base64Encoding = false
+        trackerConfig.sessionContext = true
+        trackerConfig.platformContext = true
+        trackerConfig.geoLocationContext = false
+        trackerConfig.lifecycleAutotracking = true
+        trackerConfig.screenViewAutotracking = true
+        trackerConfig.screenContext = true
+        trackerConfig.applicationContext = true
+        trackerConfig.exceptionAutotracking = true
+        trackerConfig.installAutotracking = true
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
         return Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig]);
     }
     
-    var tracker : TrackerController!
+    var tracker : TrackerController?
     
     
     override func awake(withContext context: Any?) {
@@ -74,7 +74,9 @@ class InterfaceController: WKInterfaceController, RequestCallback {
     @IBAction func sendEvent() {
         DispatchQueue.global(qos: .default).async {
             // Track all types of events
-            DemoUtils.trackAll(self.tracker)
+            if let tracker = self.tracker {
+                DemoUtils.trackAll(tracker)
+            }
         }
     }
     
