@@ -25,6 +25,7 @@ import CoreData
 import Foundation
 import UserNotifications
 import SnowplowTracker
+import AppTrackingTransparency
 
 @available(iOS 10.0, *)
 @UIApplicationMain
@@ -78,7 +79,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+        UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in
+            if #available(iOS 14, *) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                    ATTrackingManager.requestTrackingAuthorization { status in
+                        switch status {
+                        case .notDetermined:
+                            print("Authorization status not determined")
+                        case .restricted:
+                            print("Authorization status restricted")
+                        case .denied:
+                            print("Authorization status denied")
+                        case .authorized:
+                            print("Authorization status authorized")
+                        @unknown default:
+                            print("Unknown authorization status")
+                        }
+                    }
+                })
+            }
+        }
+
         application.registerForRemoteNotifications()
         UNUserNotificationCenter.current().delegate = self
         

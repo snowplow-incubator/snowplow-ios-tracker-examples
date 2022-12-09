@@ -22,6 +22,7 @@
 
 import UIKit
 import SnowplowTracker
+import AdSupport
 
 class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, RequestCallback {
 
@@ -62,6 +63,9 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         trackerConfig.diagnosticAutotracking = true
         trackerConfig.logLevel = .verbose
         trackerConfig.loggerDelegate = self
+        trackerConfig.advertisingIdentifierRetriever = {
+            ASIdentifierManager.shared().advertisingIdentifier
+        }
         var customRetryRules = [Int:Bool]()
         customRetryRules[502] = false
         let emitterConfig = EmitterConfiguration()
