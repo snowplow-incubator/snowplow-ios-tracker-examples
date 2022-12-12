@@ -52,8 +52,7 @@ struct SchemaDetail: View {
             if let json = json {
                 Section("JSON schema") {
                     Text(json)
-                        .fontDesign(.monospaced)
-                        .font(.footnote)
+                        .font(Font.footnote.monospaced())
                 }
             }
         }
