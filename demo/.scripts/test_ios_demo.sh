@@ -3,6 +3,7 @@ set -e
 set -x
 
 echo $@
+DEP_TYPE="None"
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -37,7 +38,10 @@ echo LOGPATH $LOGPATH
 #DEST_WATCH=$6
 #SCHEME_WATCH=$7
 
-if [ $DEP_TYPE == "Carthage" ]; then
+if [ $DEP_TYPE == "None" ]; then
+	cd $APP
+	printf "\n\n No Podfile or Cartfile used \n"
+elif [ $DEP_TYPE == "Carthage" ]; then
 	. .scripts/carthage-workaround.sh # to remove when fixed https://github.com/Carthage/Carthage/issues/3019#issuecomment-665136323
 	printf "\n\n Carthage update \n"
 	cd $APP
@@ -60,9 +64,6 @@ elif [[ $DEP_FILE == Podfile* ]]; then
 	cp -rf .scripts/$DEP_FILE $APP/Podfile
 	cd $APP
 	pod update
-else
-	printf "ERROR: Podfile or Cartfile is not correctly indicated" 1>&2
-	exit 1
 fi
 
 printf "\n\n Build iOS ${APP} \n"

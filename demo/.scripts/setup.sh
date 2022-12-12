@@ -20,6 +20,9 @@ BUILD_SCHEME_SWIFT_DEMO_WATCH="-scheme SnowplowSwiftWatch"
 BUILD_WORKSPACE_SWIFT_SPM_DEMO="-workspace SnowplowSwiftSPMDemo.xcworkspace"
 BUILD_SCHEME_SWIFT_SPM_DEMO_IOS="-scheme SnowplowSwiftSPMDemo"
 
+BUILD_WORKSPACE_IGLU_CENTRAL="-workspace IgluCentral.xcworkspace"
+BUILD_SCHEME_IGLU_CENTRAL_IOS="-scheme IgluCentral"
+
 #if [ "$CI" = true ]; then
 #	printf "\n\n Install Slather - Code coverage tool \n"
 #	gem install slather
