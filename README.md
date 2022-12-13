@@ -9,3 +9,4 @@ Demo apps used for testing:
 - [Swift SPM app](demo/SnowplowSwiftSPMDemo/)
 - [Swift Cocoapods app](demo/SnowplowSwiftCocoapodsDemo/)
 - [ObjC Cocoapods app](demo/SnowplowObjCDemo/)
+- [Iglu Central app in SwiftUI](demo/IgluCentral/)
