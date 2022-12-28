@@ -44,7 +44,7 @@ class DemoUtils {
     }
     
     static func trackSelfDescribingEventWithTracker(_ tracker: TrackerController) -> Int {
-        let data = ["targetUrl": "http://a-target-url.com" as NSObject];
+        let data = ["targetUrl": "http://a-target-url.com"];
         let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
         _ = tracker.track(event)
         return 1
