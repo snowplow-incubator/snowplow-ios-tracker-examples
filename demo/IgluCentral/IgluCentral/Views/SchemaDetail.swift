@@ -65,7 +65,7 @@ struct SchemaDetail: View {
         .navigationTitle(url.name)
         .snowplowScreen(
             name: "SchemaDetail",
-            contexts: [
+            entities: [
                 (
                     schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
                     data: [
