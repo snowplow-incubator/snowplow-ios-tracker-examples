@@ -34,12 +34,12 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
     var isRemoteConfig = false
     var token : String = ""
     @objc dynamic var snowplowId: String! = "page view"
-
+    
     let kAppId     = "DemoAppId"
     let kNamespace = "DemoAppNamespace"
-
+    
     // Tracker setup and init
-
+    
     func initTracker(_ url: String, method: HttpMethodOptions) -> TrackerController? {
         let network = DefaultNetworkConnection(
             urlString: url,
@@ -48,32 +48,40 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         network.emitThreadPoolSize = 20
         network.byteLimitPost = 52000
         let networkConfig = NetworkConfiguration(networkConnection: network)
+
         let trackerConfig = TrackerConfiguration()
-        trackerConfig.base64Encoding = false
-        trackerConfig.sessionContext = true
-        trackerConfig.platformContext = true
-        trackerConfig.geoLocationContext = false
-        trackerConfig.lifecycleAutotracking = true
-        trackerConfig.screenViewAutotracking = true
-        trackerConfig.screenContext = true
-        trackerConfig.applicationContext = true
-        trackerConfig.exceptionAutotracking = true
-        trackerConfig.installAutotracking = true
-        trackerConfig.diagnosticAutotracking = true
-        trackerConfig.logLevel = .verbose
-        trackerConfig.loggerDelegate = self
-        var customRetryRules = [Int:Bool]()
-        customRetryRules[502] = false
+            .base64Encoding(false)
+            .sessionContext(true)
+            .platformContext(true)
+            .geoLocationContext(false)
+            .lifecycleAutotracking(true)
+            .screenViewAutotracking(true)
+            .screenContext(true)
+            .applicationContext(true)
+            .exceptionAutotracking(true)
+            .installAutotracking(true)
+            .diagnosticAutotracking(true)
+            .logLevel(.verbose)
+            .loggerDelegate(self)
+            .advertisingIdentifierRetriever {
+                return UUID()
+            }
+
         let emitterConfig = EmitterConfiguration()
-        emitterConfig.emitRange = 500
-        emitterConfig.requestCallback = self
-        emitterConfig.customRetryForStatusCodes = customRetryRules
+            .emitRange(500)
+            .requestCallback(self)
+            .customRetryForStatusCodes([502: false])
+
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
+
         let sessionConfig = SessionConfiguration(foregroundTimeoutInSeconds: 15, backgroundTimeoutInSeconds: 15)
-        sessionConfig.onSessionStateUpdate = { session in
-            print("SessionState: previous: \(String(describing:session.previousSessionId)) - id: \(session.sessionId) - index: \(session.sessionIndex) - userID: \(session.userId) - firstEventID: \(String(describing: session.firstEventId))")
-        }
-        let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
+            .onSessionStateUpdate { (session: SessionState) in
+                print("SessionState: previous: \(String(describing:session.previousSessionId)) - id: \(session.sessionId) - index: \(session.sessionIndex) - userID: \(session.userId) - firstEventID: \(String(describing: session.firstEventId))")
+            }
+        
+        let tracker = Snowplow.createTracker(namespace: kNamespace,
+                                             network: networkConfig,
+                                             configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
 
         return tracker
     }

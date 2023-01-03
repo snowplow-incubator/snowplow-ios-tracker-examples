@@ -22,8 +22,7 @@ class Tracking {
     class func setup() {
         _ = Snowplow.createTracker(
             namespace: "ns",
-            endpoint: "http://0.0.0.0:9090",
-            method: .post
+            endpoint: "http://0.0.0.0:9090"
         )
     }
 }
