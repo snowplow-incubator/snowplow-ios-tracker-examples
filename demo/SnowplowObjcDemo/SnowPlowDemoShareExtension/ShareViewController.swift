@@ -1,9 +1,5 @@
 //
-//  ShareViewController.swift
-//  SnowPlowDemoShareExtension
-//
-//  Created by Stephen Williams on 4/08/22.
-//  Copyright © 2022 Snowplow Analytics Ltd. All rights reserved.
+//  Copyright © 2023 Snowplow Analytics Ltd. All rights reserved.
 //
 
 import UIKit
