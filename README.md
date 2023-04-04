@@ -4,9 +4,9 @@ A repository for examples applications using the Snowplow iOS Tracker
 
 ## Demo test apps
 
-Demo apps used for testing with different package managers
+Demo apps used for testing:
 
-- [ObjC Cocoapods app](demo/SnowplowDemo)
-- [Swift SPM app](demo)
-- [Swift Cocoapods app](demo/SnowplowSwiftCocoapodsDemo)
-- [Swift Carthage app](demo/SnowplowSwiftCarthageDemo)
+- [Swift SPM app](demo/SnowplowSwiftSPMDemo/)
+- [Swift Cocoapods app](demo/SnowplowSwiftCocoapodsDemo/)
+- [ObjC Cocoapods app](demo/SnowplowObjCDemo/)
+- [Iglu Central app in SwiftUI](demo/IgluCentral/)

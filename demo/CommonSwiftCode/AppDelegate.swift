@@ -1,7 +1,3 @@
-//
-//  AppDelegate.swift
-//  SnowplowSwiftDemo
-//
 //  Copyright (c) 2015-2020 Snowplow Analytics Ltd. All rights reserved.
 //
 //  This program is licensed to you under the Apache License Version 2.0,
@@ -14,11 +10,7 @@
 //  an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 //  express or implied. See the Apache License Version 2.0 for the specific
 //  language governing permissions and limitations there under.
-//
-//  Authors: Michael Hadam
 //  Copyright: Copyright (c) 2015-2020 Snowplow Analytics Ltd
-//  License: Apache License Version 2.0
-//
 
 import UIKit
 import CoreData
@@ -50,15 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
                 let request = response.notification.request
                 let requestContent = request.content
-                let userInfo = requestContent.userInfo
-                let sound = userInfo["sound"] as? String ?? "unknown"
+                let userInfo = requestContent.userInfo as? [String : NSObject]
+                let sound = userInfo?["sound"] as? String ?? "unknown"
 
                 let content = NotificationContent(title: requestContent.title, body: requestContent.body, badge: requestContent.badge!)
-                    .subtitle(requestContent.subtitle)
-                    .sound(sound)
-                    .launchImageName(requestContent.launchImageName)
-                    .userInfo(userInfo)
-                    .attachments(request.content.attachments)
+                content.subtitle = requestContent.subtitle
+                content.sound = sound
+                content.launchImageName = requestContent.launchImageName
+                content.userInfo = userInfo
+                content.attachments = request.content.attachments
                 
                 let formatter = DateFormatter()
                 formatter.dateStyle = .medium
@@ -69,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 let event = PushNotification(date: dateString, action: actionIdentifier, notificationTrigger: request.trigger, category: requestContent.categoryIdentifier, thread: requestContent.threadIdentifier, notification: content)
                 
                 //print(String(data: try! JSONSerialization.data(withJSONObject: event!.getPayload().getAsDictionary(), options: .prettyPrinted), encoding: .utf8 )!)
-                rootViewController.tracker?.track(event)
+                _ = rootViewController.tracker?.track(event)
             }
             completionHandler()
         default:

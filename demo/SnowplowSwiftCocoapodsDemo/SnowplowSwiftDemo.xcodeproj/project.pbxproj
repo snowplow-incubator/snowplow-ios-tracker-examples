@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		552F2127DCC5D08D40C69B3B /* libPods-SnowplowSwiftWatch Extension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF72FAE6B256876C3AF10CB /* libPods-SnowplowSwiftWatch Extension.a */; };
+		26014A70625F8FCBA2774628 /* Pods_SnowplowSwiftWatch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BE140415AF3A6964ADD81B /* Pods_SnowplowSwiftWatch_Extension.framework */; };
 		75699CBB200FB29C00FFC20D /* SnowplowSwiftDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75699CBA200FB29C00FFC20D /* SnowplowSwiftDemoTests.swift */; };
 		75699CC6200FB29C00FFC20D /* SnowplowSwiftDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75699CC5200FB29C00FFC20D /* SnowplowSwiftDemoUITests.swift */; };
+		9BFCEBCFA058A4F72108C274 /* Pods_SnowplowSwiftDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E7122C1643B57107D238DF /* Pods_SnowplowSwiftDemo.framework */; };
 		B3821C28238EAAD60046A15E /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3821C26238EAAD60046A15E /* Interface.storyboard */; };
 		B3821C2A238EAAD70046A15E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3821C29238EAAD70046A15E /* Assets.xcassets */; };
 		B3821C31238EAAD80046A15E /* SnowplowSwiftWatch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B3821C30238EAAD80046A15E /* SnowplowSwiftWatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -18,7 +19,6 @@
 		B3821C3A238EAAD90046A15E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3821C39238EAAD90046A15E /* Assets.xcassets */; };
 		B3821C3E238EAAD90046A15E /* SnowplowSwiftWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B3821C24238EAAD60046A15E /* SnowplowSwiftWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B3821C46238EABEB0046A15E /* DemoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8A3EB72371684500E51827 /* DemoUtils.swift */; };
-		ED4FDFF7DE40DD3868E0CB7A /* libPods-SnowplowSwiftDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EF3CCF0FD6908DCEBA92EF /* libPods-SnowplowSwiftDemo.a */; };
 		ED8A3EBE2371684500E51827 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8A3EB32371684500E51827 /* DemoViewController.swift */; };
 		ED8A3EBF2371684500E51827 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8A3EB42371684500E51827 /* AppDelegate.swift */; };
 		ED8A3EC02371684500E51827 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED8A3EB52371684500E51827 /* Assets.xcassets */; };
@@ -101,10 +101,10 @@
 		2AC7A97A2664B3B98DDB0ECC /* Pods_SnowplowSwiftDemoWatch_WatchKit_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowplowSwiftDemoWatch_WatchKit_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED6198B5112443C7612976B /* Pods-SnowplowSwiftWatch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowplowSwiftWatch Extension.release.xcconfig"; path = "Target Support Files/Pods-SnowplowSwiftWatch Extension/Pods-SnowplowSwiftWatch Extension.release.xcconfig"; sourceTree = "<group>"; };
 		458479EB1C7ABA691B3DD1A3 /* Pods-SnowplowSwiftDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowplowSwiftDemo.release.xcconfig"; path = "Target Support Files/Pods-SnowplowSwiftDemo/Pods-SnowplowSwiftDemo.release.xcconfig"; sourceTree = "<group>"; };
-		48EF3CCF0FD6908DCEBA92EF /* libPods-SnowplowSwiftDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnowplowSwiftDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4DF72FAE6B256876C3AF10CB /* libPods-SnowplowSwiftWatch Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnowplowSwiftWatch Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53EFA2C5EC5BDA3E6ED52D81 /* Pods-SnowplowSwiftDemoWatch WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowplowSwiftDemoWatch WatchKit Extension.debug.xcconfig"; path = "Target Support Files/Pods-SnowplowSwiftDemoWatch WatchKit Extension/Pods-SnowplowSwiftDemoWatch WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		5DF37441E73CB4E4BA108A05 /* Pods-SnowplowSwiftDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowplowSwiftDemo.debug.xcconfig"; path = "Target Support Files/Pods-SnowplowSwiftDemo/Pods-SnowplowSwiftDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		62BE140415AF3A6964ADD81B /* Pods_SnowplowSwiftWatch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowplowSwiftWatch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63E7122C1643B57107D238DF /* Pods_SnowplowSwiftDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnowplowSwiftDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		686A1DB1FBBED486C18495DE /* Pods-SnowplowCompanion Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnowplowCompanion Extension.release.xcconfig"; path = "Target Support Files/Pods-SnowplowCompanion Extension/Pods-SnowplowCompanion Extension.release.xcconfig"; sourceTree = "<group>"; };
 		75699C9F200FB29C00FFC20D /* SnowplowSwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnowplowSwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75699CB1200FB29C00FFC20D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED4FDFF7DE40DD3868E0CB7A /* libPods-SnowplowSwiftDemo.a in Frameworks */,
+				9BFCEBCFA058A4F72108C274 /* Pods_SnowplowSwiftDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				552F2127DCC5D08D40C69B3B /* libPods-SnowplowSwiftWatch Extension.a in Frameworks */,
+				26014A70625F8FCBA2774628 /* Pods_SnowplowSwiftWatch_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,8 +266,8 @@
 				75F9C5F421FC004100A5B8FC /* SnowplowTracker.framework */,
 				2AC7A97A2664B3B98DDB0ECC /* Pods_SnowplowSwiftDemoWatch_WatchKit_Extension.framework */,
 				DB9F5CEFABA8BFC8AA0F0601 /* Pods_SnowplowCompanion_Extension.framework */,
-				48EF3CCF0FD6908DCEBA92EF /* libPods-SnowplowSwiftDemo.a */,
-				4DF72FAE6B256876C3AF10CB /* libPods-SnowplowSwiftWatch Extension.a */,
+				63E7122C1643B57107D238DF /* Pods_SnowplowSwiftDemo.framework */,
+				62BE140415AF3A6964ADD81B /* Pods_SnowplowSwiftWatch_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -320,6 +320,7 @@
 				75699C9C200FB29C00FFC20D /* Frameworks */,
 				75699C9D200FB29C00FFC20D /* Resources */,
 				B3821C13238EA5110046A15E /* Embed Watch Content */,
+				03B75C4E48F0F2281904850B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,6 +394,7 @@
 				B3821C2C238EAAD80046A15E /* Sources */,
 				B3821C2D238EAAD80046A15E /* Frameworks */,
 				B3821C2E238EAAD80046A15E /* Resources */,
+				E8BE18AD33847EC840490A73 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -532,6 +534,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		03B75C4E48F0F2281904850B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnowplowSwiftDemo/Pods-SnowplowSwiftDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnowplowSwiftDemo/Pods-SnowplowSwiftDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnowplowSwiftDemo/Pods-SnowplowSwiftDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		29696EAEE67AAD3F103884C4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -574,6 +593,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8BE18AD33847EC840490A73 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnowplowSwiftWatch Extension/Pods-SnowplowSwiftWatch Extension-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SnowplowSwiftWatch Extension/Pods-SnowplowSwiftWatch Extension-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SnowplowSwiftWatch Extension/Pods-SnowplowSwiftWatch Extension-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -803,7 +839,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = SnowplowSwiftDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -838,7 +874,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = SnowplowSwiftDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -961,7 +997,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -985,7 +1021,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
@@ -1015,7 +1051,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Debug;
 		};
@@ -1040,7 +1076,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
 			};
 			name = Release;
 		};
