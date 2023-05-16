@@ -27,14 +27,18 @@ class PlayerViewController: AVPlayerViewController {
         if let url = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4") {
             self.player = AVPlayer(url: url)
         }
-        
-        if let player = self.player {
-            let configuration = MediaTrackingConfiguration(id: mediaTrackingID)
-            configuration.boundaries = [1,2,3,50,90]
-            self.tracking = Snowplow.defaultTracker()?.media.startMediaTracking(
-                player: player,
-                configuration: configuration
-            )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Snowplow.defaultTracker()?.media.mediaTracking(id: mediaTrackingID) == nil {
+            if let player = self.player {
+                let configuration = MediaTrackingConfiguration(id: mediaTrackingID)
+                configuration.boundaries = [1,2,3,50,90]
+                self.tracking = Snowplow.defaultTracker()?.media.startMediaTracking(
+                    player: player,
+                    configuration: configuration
+                )
+            }
         }
     }
     
