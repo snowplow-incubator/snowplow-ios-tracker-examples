@@ -21,9 +21,18 @@ class DemoUtils {
         + self.trackSelfDescribingEventWithTracker(tracker)
         + self.trackScreenViewWithTracker(tracker)
         + self.trackTimingWithCategoryWithTracker(tracker)
-        + self.trackEcommerceTransactionWithTracker(tracker)
         + self.trackDeepLinkReceivedWithTracker(tracker)
         + self.trackMessageNotificationWithTracker(tracker)
+        + self.trackAddToCartWithTracker(tracker)
+        + self.trackCheckoutStepWithTracker(tracker)
+        + self.trackProductListClickWithTracker(tracker)
+        + self.trackProductListViewWithTracker(tracker)
+        + self.trackProductViewWithTracker(tracker)
+        + self.trackPromoClickWithTracker(tracker)
+        + self.trackPromoViewWithTracker(tracker)
+        + self.trackRefundWithTracker(tracker)
+        + self.trackRemoveFromCartWithTracker(tracker)
+        + self.trackTransactionWithTracker(tracker)
     }
     
     static func trackStructuredEventWithTracker(_ tracker: TrackerController) -> Int {
@@ -55,27 +64,6 @@ class DemoUtils {
         return 1
     }
     
-    static func trackEcommerceTransactionWithTracker(_ tracker: TrackerController) -> Int {
-        let transactionID = "6a8078be"
-        
-        let item = EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
-        item.name = "DemoItemName"
-        item.category = "DemoItemCategory"
-        item.currency = "USD"
-        
-        let event = Ecommerce(orderId: transactionID, totalValue: 350, items: [item])
-        event.affiliation = "DemoTransactionAffiliation"
-        event.taxValue = 10
-        event.shipping = 15
-        event.city = "Boston"
-        event.state = "Massachisetts"
-        event.country = "USA"
-        event.currency = "USD"
-
-        _ = tracker.track(event)
-        return 2
-    }
-    
     static func trackDeepLinkReceivedWithTracker(_ tracker: TrackerController) -> Int {
         let event = DeepLinkReceived(url: "https://snowplowanalytics.com")
         event.referrer = "https://snowplowanalytics.com/referrer"
@@ -95,6 +83,84 @@ class DemoUtils {
         event.attachments = [
             MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplowanalytics.com")
         ]
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackAddToCartWithTracker(_ tracker: TrackerController) -> Int {
+        let product = ProductEntity(id: "productId", category: "product/category", currency: "NZD", price: 3)
+        
+        let cart = CartEntity(totalValue: 5, currency: "NZD")
+        
+        let event = AddToCartEvent(products: [product], cart: cart)
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackCheckoutStepWithTracker(_ tracker: TrackerController) -> Int {
+        let event = CheckoutStepEvent(step: 1, accountType: "guest")
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackProductListClickWithTracker(_ tracker: TrackerController) -> Int {
+        let product = ProductEntity(id: "ABC", category: "category", currency: "KRW", price: 1234567.89)
+        
+        let event = ProductListClickEvent(product: product)
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackProductListViewWithTracker(_ tracker: TrackerController) -> Int {
+        let product = ProductEntity(id: "plow1", category: "snow.clearance.ploughs.large", currency: "NOK", price: 3000)
+        
+        let event = ProductListViewEvent(products: [product], name: "listName")
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackProductViewWithTracker(_ tracker: TrackerController) -> Int {
+        let product = ProductEntity(id: "plow2", category: "snow.clearance.ploughs.large", currency: "NOK", price: 5000)
+        
+        let event = ProductViewEvent(product: product)
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackPromoClickWithTracker(_ tracker: TrackerController) -> Int {
+        let promotion = PromotionEntity(id: "XYZ-promo")
+        
+        let event = PromotionClickEvent(promotion: promotion)
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackPromoViewWithTracker(_ tracker: TrackerController) -> Int {
+        let promotion = PromotionEntity(id: "ABC-promo")
+        
+        let event = PromotionViewEvent(promotion: promotion)
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackRefundWithTracker(_ tracker: TrackerController) -> Int {
+        let event = RefundEvent(transactionId: "sale567", refundAmount: 555, currency: "HKD")
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackRemoveFromCartWithTracker(_ tracker: TrackerController) -> Int {
+        let product = ProductEntity(id: "1234abc567-1", category: "iap/boost", currency: "EUR", price: 1.99)
+        
+        let cart = CartEntity(totalValue: 4, currency: "EUR")
+        
+        let event = RemoveFromCartEvent(products: [product], cart: cart)
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackTransactionWithTracker(_ tracker: TrackerController) -> Int {
+        let event = TransactionEvent(transactionId: "sale567", revenue: 1000, currency: "HKD", paymentMethod: "paypal", totalQuantity: 2)
         _ = tracker.track(event)
         return 1
     }

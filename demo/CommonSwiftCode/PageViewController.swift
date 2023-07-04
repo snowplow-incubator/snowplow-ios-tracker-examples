@@ -74,6 +74,8 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         let tracker = Snowplow.createTracker(namespace: kNamespace,
                                              network: networkConfig,
                                              configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
+        
+        tracker?.ecommerce.setEcommerceUser(EcommUserEntity(id: "ecomm_user_id"))
 
         return tracker
     }
@@ -97,6 +99,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             Snowplow.refresh(onSuccess: successCallback)
         } else {
             Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: nil, onSuccess: successCallback)
+            Snowplow.defaultTracker()?.ecommerce.setEcommerceScreen(EcommScreenEntity(type: "demo_app_screen", locale: "England/London"))
         }
     }
     
