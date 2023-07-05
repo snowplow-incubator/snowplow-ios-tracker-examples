@@ -142,6 +142,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         return [self.newVc(viewController: "demo"),
                 self.newVc(viewController: "metrics"),
                 self.newVc(viewController: "web"),
+                self.newVc(viewController: "player"),
                 self.newVc(viewController: "additional")]
     }()
 
