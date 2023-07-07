@@ -75,7 +75,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
                                              network: networkConfig,
                                              configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
         
-        tracker?.ecommerce.setEcommerceUser(EcommUserEntity(id: "ecomm_user_id"))
+        tracker?.ecommerce.setEcommerceUser(EcommerceUserEntity(id: "ecomm_user_id"))
 
         return tracker
     }
@@ -99,7 +99,7 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             Snowplow.refresh(onSuccess: successCallback)
         } else {
             Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: nil, onSuccess: successCallback)
-            Snowplow.defaultTracker()?.ecommerce.setEcommerceScreen(EcommScreenEntity(type: "demo_app_screen", locale: "England/London"))
+            Snowplow.defaultTracker()?.ecommerce.setEcommerceScreen(EcommerceScreenEntity(type: "demo_app_screen", locale: "England/London"))
         }
     }
     
