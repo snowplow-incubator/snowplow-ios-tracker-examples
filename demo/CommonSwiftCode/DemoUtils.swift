@@ -33,6 +33,7 @@ class DemoUtils {
         + self.trackRefundWithTracker(tracker)
         + self.trackRemoveFromCartWithTracker(tracker)
         + self.trackTransactionWithTracker(tracker)
+        + self.trackTransactionErrorWithTracker(tracker)
     }
     
     static func trackStructuredEventWithTracker(_ tracker: TrackerController) -> Int {
@@ -89,10 +90,11 @@ class DemoUtils {
     
     static func trackAddToCartWithTracker(_ tracker: TrackerController) -> Int {
         let product = ProductEntity(id: "productId", category: "product/category", currency: "NZD", price: 3)
+        let anotherProduct = ProductEntity(id: "productId2", category: "product/category/specific", currency: "NZD", price: 100)
         
         let cart = CartEntity(totalValue: 5, currency: "NZD")
         
-        let event = AddToCartEvent(products: [product], cart: cart)
+        let event = AddToCartEvent(products: [product, anotherProduct], cart: cart)
         _ = tracker.track(event)
         return 1
     }
@@ -160,7 +162,15 @@ class DemoUtils {
     }
     
     static func trackTransactionWithTracker(_ tracker: TrackerController) -> Int {
-        let event = TransactionEvent(transactionId: "sale567", revenue: 1000, currency: "HKD", paymentMethod: "paypal", totalQuantity: 2)
+        let transaction = TransactionEntity(transactionId: "sale567", revenue: 1000, currency: "HKD", paymentMethod: "paypal", totalQuantity: 2)
+        let event = TransactionEvent(transaction: transaction)
+        _ = tracker.track(event)
+        return 1
+    }
+    
+    static func trackTransactionErrorWithTracker(_ tracker: TrackerController) -> Int {
+        let transaction = TransactionEntity(transactionId: "saleABC", revenue: 9001, currency: "GBP", paymentMethod: "visa", totalQuantity: 1)
+        let event = TransactionErrorEvent(transaction: transaction, errorCode: "error", errorType: .soft)
         _ = tracker.track(event)
         return 1
     }
