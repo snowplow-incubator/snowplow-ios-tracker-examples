@@ -106,11 +106,14 @@ class DemoUtils {
     }
     
     static func trackProductListClickWithTracker(_ tracker: TrackerController) -> Int {
-        let product = ProductEntity(id: "ABC", category: "category", currency: "KRW", price: 1234567.89)
-        
-        let event = ProductListClickEvent(product: product)
-        _ = tracker.track(event)
-        return 1
+        if let price = Decimal(string: "1234567.89") {
+            let product = ProductEntity(id: "ABC", category: "category", currency: "KRW", price: price)
+            
+            let event = ProductListClickEvent(product: product)
+            _ = tracker.track(event)
+            return 1
+        }
+        return 0
     }
     
     static func trackProductListViewWithTracker(_ tracker: TrackerController) -> Int {
@@ -152,13 +155,16 @@ class DemoUtils {
     }
     
     static func trackRemoveFromCartWithTracker(_ tracker: TrackerController) -> Int {
-        let product = ProductEntity(id: "1234abc567-1", category: "iap/boost", currency: "EUR", price: 1.99)
-        
-        let cart = CartEntity(totalValue: 4, currency: "EUR")
-        
-        let event = RemoveFromCartEvent(products: [product], cart: cart)
-        _ = tracker.track(event)
-        return 1
+        if let price = Decimal(string: "1.99") {
+            let product = ProductEntity(id: "1234abc567-1", category: "iap/boost", currency: "EUR", price: price)
+            
+            let cart = CartEntity(totalValue: 4, currency: "EUR")
+            
+            let event = RemoveFromCartEvent(products: [product], cart: cart)
+            _ = tracker.track(event)
+            return 1
+        }
+        return 0
     }
     
     static func trackTransactionWithTracker(_ tracker: TrackerController) -> Int {
