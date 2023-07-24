@@ -76,6 +76,10 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
                                              configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
         
         tracker?.ecommerce.setEcommerceUser(EcommerceUserEntity(id: "ecomm_user_id"))
+        
+        let exampleGlobalEntity = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExampleLocal"])
+        let staticGlobalContext = GlobalContext(staticContexts: [exampleGlobalEntity])
+        let _ = tracker?.globalContexts?.add(tag: "global", contextGenerator: staticGlobalContext)
 
         return tracker
     }
@@ -85,6 +89,12 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
         let successCallback: ([String]?, ConfigurationState) -> Void = { _, state in
             let tracker = Snowplow.defaultTracker()
             tracker?.emitter?.requestCallback = self
+            tracker?.ecommerce.setEcommerceScreen(EcommerceScreenEntity(type: "demo_app_screen", locale: "England/London"))
+            
+            let exampleGlobalEntity = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExampleRemote"])
+            let staticGlobalContext = GlobalContext(staticContexts: [exampleGlobalEntity])
+            let _ = tracker?.globalContexts?.add(tag: "global", contextGenerator: staticGlobalContext)
+
             switch state {
             case .cached:
                 print("Configuration loaded from cache")
@@ -99,7 +109,6 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             Snowplow.refresh(onSuccess: successCallback)
         } else {
             Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: nil, onSuccess: successCallback)
-            Snowplow.defaultTracker()?.ecommerce.setEcommerceScreen(EcommerceScreenEntity(type: "demo_app_screen", locale: "England/London"))
         }
     }
     
