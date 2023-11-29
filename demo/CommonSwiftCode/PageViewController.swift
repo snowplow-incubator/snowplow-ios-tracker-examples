@@ -60,7 +60,6 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
             }
 
         let emitterConfig = EmitterConfiguration()
-            .emitRange(500)
             .requestCallback(self)
             .customRetryForStatusCodes([502: false])
 
