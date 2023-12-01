@@ -74,11 +74,11 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
                                              network: networkConfig,
                                              configurations: [trackerConfig, emitterConfig, gdprConfig, sessionConfig])
         
-        tracker?.ecommerce.setEcommerceUser(EcommerceUserEntity(id: "ecomm_user_id"))
+        tracker.ecommerce.setEcommerceUser(EcommerceUserEntity(id: "ecomm_user_id"))
         
         let exampleGlobalEntity = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExampleLocal"])
         let staticGlobalContext = GlobalContext(staticContexts: [exampleGlobalEntity])
-        let _ = tracker?.globalContexts?.add(tag: "global", contextGenerator: staticGlobalContext)
+        let _ = tracker.globalContexts?.add(tag: "global", contextGenerator: staticGlobalContext)
 
         return tracker
     }
