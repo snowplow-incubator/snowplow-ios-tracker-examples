@@ -19,6 +19,9 @@ class Tracking {
         _ = Snowplow.createTracker(
             namespace: "ns",
             endpoint: "http://0.0.0.0:9090"
-        )
+        ) {
+            TrackerConfiguration()
+                .lifecycleAutotracking(true)
+        }
     }
 }
