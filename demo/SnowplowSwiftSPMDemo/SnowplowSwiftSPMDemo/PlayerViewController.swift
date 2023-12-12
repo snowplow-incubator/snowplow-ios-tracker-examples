@@ -20,6 +20,8 @@ class PlayerViewController: AVPlayerViewController {
     
     private var tracking: MediaTracking?
     private var mediaTrackingID = "media1"
+    
+    @objc dynamic var snowplowId: String! = "player view"
 
     override func viewDidLoad() {
         super.viewDidLoad()

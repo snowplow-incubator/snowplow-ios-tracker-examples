@@ -32,7 +32,7 @@ class MetricsViewController: UIViewController, UITextFieldDelegate, PageObserver
     var updateTimer : Timer?
     weak var tracker : TrackerController?
 
-    @objc dynamic var snowplowId: String! = "metrics view"
+    @objc dynamic var snowplowId: String! = "scroll view"
 
     func updateToken(_ token: String) {
         tokenLabel.text = String(format: "Token: %@", token)
