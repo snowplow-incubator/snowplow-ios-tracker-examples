@@ -21,8 +21,11 @@ struct OrbitToggle: View {
                 Task {
                     if isShowing {
                         await openImmersiveSpace(id: Module.orbit.name)
+                        Tracking.openImmersiveSpace(immersiveSpaceId: Module.orbit.name)
+                        
                     } else {
                         await dismissImmersiveSpace()
+                        Tracking.dismissImmersiveSpace(immersiveSpaceId: Module.orbit.name)
                     }
                 }
             }

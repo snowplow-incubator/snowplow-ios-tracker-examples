@@ -15,6 +15,10 @@ import Foundation
 import SnowplowTracker
 
 class Tracking {
+    
+    static var windowGroups: [String : WindowStyle] = [:]
+    static var immersiveSpaces: [String : ImmersionStyle] = [:]
+    
     class func setup() {
         _ = Snowplow.createTracker(
             namespace: "ns",
@@ -22,6 +26,54 @@ class Tracking {
         ) {
             TrackerConfiguration()
                 .lifecycleAutotracking(true)
+        }
+    }
+    
+    class func openWindow(windowGroupId: String) {
+        if let style = windowGroups[windowGroupId] {
+            let entity = WindowGroupEntity(
+                windowGroupID: windowGroupId,
+                windowStyle: style
+            )
+            let event = OpenWindowEvent()
+            event.entities.append(entity)
+            _ = Snowplow.defaultTracker()?.track(event)
+        }
+    }
+    
+    class func dismissWindow(windowGroupId: String) {
+        if let style = windowGroups[windowGroupId] {
+            let entity = WindowGroupEntity(
+                windowGroupID: windowGroupId,
+                windowStyle: style
+            )
+            let event = DismissWindowEvent()
+            event.entities.append(entity)
+            _ = Snowplow.defaultTracker()?.track(event)
+        }
+    }
+    
+    class func openImmersiveSpace(immersiveSpaceId: String) {
+        if let style = immersiveSpaces[immersiveSpaceId] {
+            let entity = ImmersiveSpaceEntity(
+                immersiveSpaceId: immersiveSpaceId,
+                immersionStyle: style
+            )
+            let event = OpenSpaceEvent()
+            event.entities.append(entity)
+            _ = Snowplow.defaultTracker()?.track(event)
+        }
+    }
+    
+    class func dismissImmersiveSpace(immersiveSpaceId: String) {
+        if let style = immersiveSpaces[immersiveSpaceId] {
+            let entity = ImmersiveSpaceEntity(
+                immersiveSpaceId: immersiveSpaceId,
+                immersionStyle: style
+            )
+            let event = DismissSpaceEvent()
+            event.entities.append(entity)
+            _ = Snowplow.defaultTracker()?.track(event)
         }
     }
 }

@@ -18,8 +18,10 @@ struct SolarSystemToggle: View {
             Task {
                 if model.isShowingSolar {
                     await dismissImmersiveSpace()
+                    Tracking.dismissImmersiveSpace(immersiveSpaceId: Module.solar.name)
                 } else {
                     await openImmersiveSpace(id: Module.solar.name)
+                    Tracking.openImmersiveSpace(immersiveSpaceId: Module.solar.name)
                 }
             }
         } label: {

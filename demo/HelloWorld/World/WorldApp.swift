@@ -34,6 +34,7 @@ struct WorldApp: App {
         }
         .windowStyle(.volumetric)
         .defaultSize(width: 0.6, height: 0.6, depth: 0.6, in: .meters)
+        
 
         // An immersive space that places the Earth with some of its satellites
         // in your surroundings.
@@ -60,5 +61,9 @@ struct WorldApp: App {
         TraceSystem.registerSystem()
         SunPositionComponent.registerComponent()
         SunPositionSystem.registerSystem()
+        
+        Tracking.windowGroups[Module.globe.name] = .volumetric
+        Tracking.immersiveSpaces[Module.orbit.name] = .mixed
+        Tracking.immersiveSpaces[Module.solar.name] = .full
     }
 }

@@ -20,8 +20,10 @@ struct GlobeToggle: View {
             .onChange(of: model.isShowingGlobe) { _, isShowing in
                 if isShowing {
                     openWindow(id: Module.globe.name)
+                    Tracking.openWindow(windowGroupId: Module.globe.name)
                 } else {
                     dismissWindow(id: Module.globe.name)
+                    Tracking.dismissWindow(windowGroupId: Module.globe.name)
                 }
             }
             .toggleStyle(.button)
