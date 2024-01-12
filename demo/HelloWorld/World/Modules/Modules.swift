@@ -49,6 +49,7 @@ struct Modules: View {
                 }
             }
         }
+        .snowplowScreen(name: "Navigation")
     }
 }
 

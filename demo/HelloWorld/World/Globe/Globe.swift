@@ -43,6 +43,7 @@ struct Globe: View {
         .onDisappear {
             model.isShowingGlobe = false
         }
+        .snowplowScreen(name: "Globe")
     }
 }
 

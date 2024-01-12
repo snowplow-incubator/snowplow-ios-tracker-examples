@@ -18,10 +18,14 @@ let package = Package(
             name: "WorldAssets",
             targets: ["WorldAssets"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(name: "SnowplowTracker", path: "../../snowplow-ios-tracker")
+    ],
     targets: [
         .target(
             name: "WorldAssets",
-            dependencies: [])
+            dependencies: [
+                "SnowplowTracker"
+            ])
     ]
 )

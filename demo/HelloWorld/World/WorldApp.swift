@@ -25,6 +25,7 @@ struct WorldApp: App {
                 .environment(model)
         }
         .windowStyle(.plain)
+        
 
         // A volume that displays a globe.
         WindowGroup(id: Module.globe.name) {

@@ -36,5 +36,6 @@ struct SolarSystem: View {
         .onDisappear {
             model.isShowingSolar = false
         }
+        .snowplowScreen(name: "SolarSystem")
     }
 }

@@ -34,5 +34,6 @@ struct Orbit: View {
         .onDisappear {
             model.isShowingOrbit = false
         }
+        .snowplowScreen(name: "Orbit")
     }
 }

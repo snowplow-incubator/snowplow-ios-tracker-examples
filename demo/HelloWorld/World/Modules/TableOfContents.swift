@@ -65,6 +65,7 @@ struct TableOfContents: View {
                 .accessibility(hidden: true)
         }
         .animation(.default.speed(0.25), value: model.isTitleFinished)
+        .onAppear { Tracking.setup() }
     }
 }
 

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -50,11 +50,13 @@
 		C2F31EFC29CC01BC009742AD /* TableOfContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F31EFB29CC01BC009742AD /* TableOfContents.swift */; };
 		C2F31EFE29CC02D7009742AD /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F31EFD29CC02D7009742AD /* Module.swift */; };
 		C2F31F0029CC0858009742AD /* ModuleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F31EFF29CC0858009742AD /* ModuleDetail.swift */; };
+		D995A8852B514F11003E4612 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D995A8842B514F11003E4612 /* Tracking.swift */; };
+		D995A8882B514FD5003E4612 /* SnowplowTracker in Frameworks */ = {isa = PBXBuildFile; productRef = D995A8872B514FD5003E4612 /* SnowplowTracker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6FD03BD460C2666C0917AC9F /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		BA5D813EE652D2B6F9AA7B35 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		6FD03BD460C2666C0917AC9F /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		BA5D813EE652D2B6F9AA7B35 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		C200227C2988392F00732240 /* Entity+Sunlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Sunlight.swift"; sourceTree = "<group>"; };
 		C200227E29883B3900732240 /* GlobeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobeSettings.swift; sourceTree = "<group>"; };
 		C20197A329E3D9C900C6A20F /* SatelliteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SatelliteEntity.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		C2F31EFB29CC01BC009742AD /* TableOfContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOfContents.swift; sourceTree = "<group>"; };
 		C2F31EFD29CC02D7009742AD /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		C2F31EFF29CC0858009742AD /* ModuleDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleDetail.swift; sourceTree = "<group>"; };
+		D995A8842B514F11003E4612 /* Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D995A8882B514FD5003E4612 /* SnowplowTracker in Frameworks */,
 				C2A8375F2A2527DB00AD11D6 /* WorldAssets in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,6 +187,7 @@
 				C2A51FAE29AB0AEB00217068 /* Resources */,
 				C22D1AFA28EB403600CE0F8F /* Info.plist */,
 				C22D1AF728EB403600CE0F8F /* Preview Content */,
+				D995A8842B514F11003E4612 /* Tracking.swift */,
 			);
 			path = World;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 			name = World;
 			packageProductDependencies = (
 				C2A8375E2A2527DB00AD11D6 /* WorldAssets */,
+				D995A8872B514FD5003E4612 /* SnowplowTracker */,
 			);
 			productName = HelloGlobe;
 			productReference = C22D1AEE28EB403400CE0F8F /* World.app */;
@@ -354,6 +360,9 @@
 				Base,
 			);
 			mainGroup = C22D1AE528EB403400CE0F8F;
+			packageReferences = (
+				D995A8862B514FD5003E4612 /* XCLocalSwiftPackageReference "../../.." */,
+			);
 			productRefGroup = C22D1AEF28EB403400CE0F8F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -401,6 +410,7 @@
 				C25774D829E2361000A75567 /* TypeTextModifier.swift in Sources */,
 				C2F31EFE29CC02D7009742AD /* Module.swift in Sources */,
 				C2F2CA342A391D4200E1C2A2 /* EarthSettings.swift in Sources */,
+				D995A8852B514F11003E4612 /* Tracking.swift in Sources */,
 				C2F31EFC29CC01BC009742AD /* TableOfContents.swift in Sources */,
 				C2DEDA242996FAAB00F5265B /* GlobeControls.swift in Sources */,
 				C2E652D42919E41A007934BC /* SolarSystemSettings.swift in Sources */,
@@ -636,10 +646,21 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D995A8862B514FD5003E4612 /* XCLocalSwiftPackageReference "../../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		C2A8375E2A2527DB00AD11D6 /* WorldAssets */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WorldAssets;
+		};
+		D995A8872B514FD5003E4612 /* SnowplowTracker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SnowplowTracker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
