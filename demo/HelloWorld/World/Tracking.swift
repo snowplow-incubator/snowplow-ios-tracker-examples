@@ -22,7 +22,7 @@ class Tracking {
     class func setup() {
         _ = Snowplow.createTracker(
             namespace: "ns",
-            endpoint: "https://983c-82-26-43-253.ngrok-free.app"
+            endpoint: "http://0.0.0.0:9090"
         ) {
             TrackerConfiguration()
                 .lifecycleAutotracking(true)

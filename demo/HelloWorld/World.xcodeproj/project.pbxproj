@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B144A202B5531C80098487E /* SnowplowTracker in Frameworks */ = {isa = PBXBuildFile; productRef = 6B144A1F2B5531C80098487E /* SnowplowTracker */; };
 		C200227D2988392F00732240 /* Entity+Sunlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200227C2988392F00732240 /* Entity+Sunlight.swift */; };
 		C200227F29883B3900732240 /* GlobeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C200227E29883B3900732240 /* GlobeSettings.swift */; };
 		C20197A429E3D9C900C6A20F /* SatelliteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20197A329E3D9C900C6A20F /* SatelliteEntity.swift */; };
@@ -51,7 +52,6 @@
 		C2F31EFE29CC02D7009742AD /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F31EFD29CC02D7009742AD /* Module.swift */; };
 		C2F31F0029CC0858009742AD /* ModuleDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F31EFF29CC0858009742AD /* ModuleDetail.swift */; };
 		D995A8852B514F11003E4612 /* Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = D995A8842B514F11003E4612 /* Tracking.swift */; };
-		D995A8882B514FD5003E4612 /* SnowplowTracker in Frameworks */ = {isa = PBXBuildFile; productRef = D995A8872B514FD5003E4612 /* SnowplowTracker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D995A8882B514FD5003E4612 /* SnowplowTracker in Frameworks */,
+				6B144A202B5531C80098487E /* SnowplowTracker in Frameworks */,
 				C2A8375F2A2527DB00AD11D6 /* WorldAssets in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,7 +329,7 @@
 			name = World;
 			packageProductDependencies = (
 				C2A8375E2A2527DB00AD11D6 /* WorldAssets */,
-				D995A8872B514FD5003E4612 /* SnowplowTracker */,
+				6B144A1F2B5531C80098487E /* SnowplowTracker */,
 			);
 			productName = HelloGlobe;
 			productReference = C22D1AEE28EB403400CE0F8F /* World.app */;
@@ -654,13 +654,13 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6B144A1F2B5531C80098487E /* SnowplowTracker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SnowplowTracker;
+		};
 		C2A8375E2A2527DB00AD11D6 /* WorldAssets */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = WorldAssets;
-		};
-		D995A8872B514FD5003E4612 /* SnowplowTracker */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SnowplowTracker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
