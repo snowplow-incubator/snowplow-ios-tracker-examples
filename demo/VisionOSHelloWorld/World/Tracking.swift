@@ -31,24 +31,22 @@ class Tracking {
     
     class func openWindow(windowGroupId: String) {
         if let style = windowGroups[windowGroupId] {
-            let entity = WindowGroupEntity(
-                windowGroupId: windowGroupId,
+            let event = OpenWindowEvent(
+                id: UUID(),
+                stringId: windowGroupId,
                 windowStyle: style
             )
-            let event = OpenWindowEvent()
-            event.entities.append(entity)
             _ = Snowplow.defaultTracker()?.track(event)
         }
     }
     
     class func dismissWindow(windowGroupId: String) {
         if let style = windowGroups[windowGroupId] {
-            let entity = WindowGroupEntity(
-                windowGroupId: windowGroupId,
+            let event = DismissWindowEvent(
+                id: UUID(),
+                stringId: windowGroupId,
                 windowStyle: style
             )
-            let event = DismissWindowEvent()
-            event.entities.append(entity)
             _ = Snowplow.defaultTracker()?.track(event)
         }
     }
