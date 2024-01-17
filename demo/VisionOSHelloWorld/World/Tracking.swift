@@ -25,51 +25,36 @@ class Tracking {
             endpoint: "http://0.0.0.0:9090"
         ) {
             TrackerConfiguration()
-                .lifecycleAutotracking(true)
+                .immersiveSpaceContext(true)
         }
     }
     
     class func openWindow(windowGroupId: String) {
-        if let style = windowGroups[windowGroupId] {
-            let event = OpenWindowEvent(
-                id: windowGroupId,
-                windowStyle: style
-            )
-            _ = Snowplow.defaultTracker()?.track(event)
-        }
+        let event = OpenWindowEvent(
+            id: windowGroupId,
+            windowStyle: windowGroups[windowGroupId]
+        )
+        _ = Snowplow.defaultTracker()?.track(event)
     }
     
     class func dismissWindow(windowGroupId: String) {
-        if let style = windowGroups[windowGroupId] {
-            let event = DismissWindowEvent(
-                id: windowGroupId,
-                windowStyle: style
-            )
-            _ = Snowplow.defaultTracker()?.track(event)
-        }
+        let event = DismissWindowEvent(
+            id: windowGroupId,
+            windowStyle: windowGroups[windowGroupId]
+        )
+        _ = Snowplow.defaultTracker()?.track(event)
     }
     
     class func openImmersiveSpace(immersiveSpaceId: String) {
-        if let style = immersiveSpaces[immersiveSpaceId] {
-            let entity = ImmersiveSpaceEntity(
-                id: immersiveSpaceId,
-                immersionStyle: style
-            )
-            let event = OpenImmersiveSpaceEvent()
-            event.entities.append(entity)
-            _ = Snowplow.defaultTracker()?.track(event)
-        }
+        let event = OpenImmersiveSpaceEvent(
+            id: immersiveSpaceId,
+            immersionStyle: immersiveSpaces[immersiveSpaceId]
+        )
+        _ = Snowplow.defaultTracker()?.track(event)
     }
     
-    class func dismissImmersiveSpace(immersiveSpaceId: String) {
-        if let style = immersiveSpaces[immersiveSpaceId] {
-            let entity = ImmersiveSpaceEntity(
-                id: immersiveSpaceId,
-                immersionStyle: style
-            )
-            let event = DismissImmersiveSpaceEvent()
-            event.entities.append(entity)
-            _ = Snowplow.defaultTracker()?.track(event)
-        }
+    class func dismissImmersiveSpace() {
+        let event = DismissImmersiveSpaceEvent()
+        _ = Snowplow.defaultTracker()?.track(event)
     }
 }
