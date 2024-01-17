@@ -32,8 +32,7 @@ class Tracking {
     class func openWindow(windowGroupId: String) {
         if let style = windowGroups[windowGroupId] {
             let event = OpenWindowEvent(
-                id: UUID(),
-                stringId: windowGroupId,
+                id: windowGroupId,
                 windowStyle: style
             )
             _ = Snowplow.defaultTracker()?.track(event)
@@ -43,8 +42,7 @@ class Tracking {
     class func dismissWindow(windowGroupId: String) {
         if let style = windowGroups[windowGroupId] {
             let event = DismissWindowEvent(
-                id: UUID(),
-                stringId: windowGroupId,
+                id: windowGroupId,
                 windowStyle: style
             )
             _ = Snowplow.defaultTracker()?.track(event)
@@ -54,7 +52,7 @@ class Tracking {
     class func openImmersiveSpace(immersiveSpaceId: String) {
         if let style = immersiveSpaces[immersiveSpaceId] {
             let entity = ImmersiveSpaceEntity(
-                immersiveSpaceId: immersiveSpaceId,
+                id: immersiveSpaceId,
                 immersionStyle: style
             )
             let event = OpenImmersiveSpaceEvent()
@@ -66,7 +64,7 @@ class Tracking {
     class func dismissImmersiveSpace(immersiveSpaceId: String) {
         if let style = immersiveSpaces[immersiveSpaceId] {
             let entity = ImmersiveSpaceEntity(
-                immersiveSpaceId: immersiveSpaceId,
+                id: immersiveSpaceId,
                 immersionStyle: style
             )
             let event = DismissImmersiveSpaceEvent()
