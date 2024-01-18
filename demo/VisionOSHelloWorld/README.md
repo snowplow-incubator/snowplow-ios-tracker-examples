@@ -8,3 +8,6 @@ in ways that best suit different teaching objectives.
 For more information about the app and how it works, see
 [Hello World](https://developer.apple.com/documentation/visionos/world)
 in the developer documentation.
+
+## Snowplow tracking
+This demo app was created by Apple. We have added VisionOS tracking as well as Screen Views.
