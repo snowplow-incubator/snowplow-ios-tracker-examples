@@ -10,4 +10,4 @@ For more information about the app and how it works, see
 in the developer documentation.
 
 ## Snowplow tracking
-This demo app was created by Apple. We have added VisionOS tracking as well as Screen Views.
+This demo app was created by Apple. We have added visionOS tracking as well as Screen Views.
