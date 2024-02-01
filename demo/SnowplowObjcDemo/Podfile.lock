@@ -1,5 +1,8 @@
 PODS:
   - SnowplowTracker (5.5.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
 
 DEPENDENCIES:
   - SnowplowTracker (from `../../../`)
