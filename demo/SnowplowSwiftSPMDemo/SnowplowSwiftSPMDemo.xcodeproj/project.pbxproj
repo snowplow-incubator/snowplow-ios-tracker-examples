@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		6B07CDAA287709A500E510D6 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B07CDA9287709A500E510D6 /* WebViewController.swift */; };
+		6B2A7DC92B28563F00EBBE8C /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2A7DC82B28563F00EBBE8C /* ScrollViewController.swift */; };
 		6BFAFA3529C21B9F00FC47EB /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BFAFA3429C21B9F00FC47EB /* PlayerViewController.swift */; };
 		CEF26A06243CC5630051C2EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF269F6243CC5630051C2EB /* LaunchScreen.storyboard */; };
 		CEF26A07243CC5630051C2EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEF269F8243CC5630051C2EB /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		6B07CDA9287709A500E510D6 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = ../../CommonSwiftCode/WebViewController.swift; sourceTree = "<group>"; };
+		6B2A7DC82B28563F00EBBE8C /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollViewController.swift; path = ../../CommonSwiftCode/ScrollViewController.swift; sourceTree = "<group>"; };
 		6BFAFA3429C21B9F00FC47EB /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		CEF269DD243CC5440051C2EB /* SnowplowSwiftSPMDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnowplowSwiftSPMDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF269EE243CC5450051C2EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 		CEF269DF243CC5440051C2EB /* SnowplowSwiftSPMDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6B2A7DC82B28563F00EBBE8C /* ScrollViewController.swift */,
 				CEF26A04243CC5630051C2EB /* SnowplowSwiftDemo.entitlements */,
 				CEF269EE243CC5450051C2EB /* Info.plist */,
 				CEF26A05243CC5630051C2EB /* AdditionalViewController.swift */,
@@ -193,6 +196,7 @@
 				CEF26A0F243CC5630051C2EB /* MetricsViewController.swift in Sources */,
 				6BFAFA3529C21B9F00FC47EB /* PlayerViewController.swift in Sources */,
 				CEF26A08243CC5630051C2EB /* AppDelegate.swift in Sources */,
+				6B2A7DC92B28563F00EBBE8C /* ScrollViewController.swift in Sources */,
 				CEF26A0C243CC5630051C2EB /* DemoViewController.swift in Sources */,
 				6B07CDAA287709A500E510D6 /* WebViewController.swift in Sources */,
 			);

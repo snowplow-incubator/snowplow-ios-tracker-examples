@@ -1,4 +1,4 @@
-//  Copyright (c) 2013-2023 Snowplow Analytics Ltd. All rights reserved.
+//  Copyright (c) 2013-present Snowplow Analytics Ltd. All rights reserved.
 //
 //  This program is licensed to you under the Apache License Version 2.0,
 //  and you may not use this file except in compliance with the Apache License
@@ -26,21 +26,24 @@ struct SchemaList: View {
     }
     
     var body: some View {
-        List(filteredSchemas, id: \.url) { schema in
-            NavigationLink {
-                SchemaDetail(url: schema)
-            } label: {
-                VStack(alignment: .leading) {
-                    Text("Name").font(.caption)
-                    Text(schema.name).fontWeight(.heavy)
-                    Spacer()
-                    Text("Vendor").font(.caption)
-                    Text(schema.vendor).fontWeight(.light)
-                    Text("Version").font(.caption)
-                    Text(schema.version).fontWeight(.light)
+        List {
+            ForEach(Array(filteredSchemas.enumerated()), id: \.1.url) { offset, schema in
+                NavigationLink {
+                    SchemaDetail(url: schema)
+                } label: {
+                    VStack(alignment: .leading) {
+                        Text("Name").font(.caption)
+                        Text(schema.name).fontWeight(.heavy)
+                        Spacer()
+                        Text("Vendor").font(.caption)
+                        Text(schema.vendor).fontWeight(.light)
+                        Text("Version").font(.caption)
+                        Text(schema.version).fontWeight(.light)
+                    }
                 }
+                .padding(.top)
+                .snowplowListItem(index: offset, itemsCount: filteredSchemas.count)
             }
-            .padding(.top)
         }
         .navigationTitle("Schemas")
         .onAppear(perform: {
