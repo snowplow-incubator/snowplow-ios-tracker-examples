@@ -65,10 +65,11 @@ class PageViewController:  UIPageViewController, UIPageViewControllerDelegate, U
 
         let gdprConfig = GDPRConfiguration(basis: .consent, documentId: "id", documentVersion: "1.0", documentDescription: "description")
 
-        let sessionConfig = SessionConfiguration(foregroundTimeoutInSeconds: 15, backgroundTimeoutInSeconds: 15)
+        let sessionConfig = SessionConfiguration(foregroundTimeoutInSeconds: 15 * 60, backgroundTimeoutInSeconds: 15 * 60)
             .onSessionStateUpdate { (session: SessionState) in
                 print("SessionState: previous: \(String(describing:session.previousSessionId)) - id: \(session.sessionId) - index: \(session.sessionIndex) - userID: \(session.userId) - firstEventID: \(String(describing: session.firstEventId))")
             }
+            .continueSessionOnRestart(true)
         
         let tracker = Snowplow.createTracker(namespace: kNamespace,
                                              network: networkConfig,
