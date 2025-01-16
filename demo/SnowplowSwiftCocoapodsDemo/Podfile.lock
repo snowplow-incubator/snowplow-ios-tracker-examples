@@ -1,5 +1,5 @@
 PODS:
-  - SnowplowTracker (6.0.9)
+  - SnowplowTracker (6.1.0)
 
 DEPENDENCIES:
   - SnowplowTracker (from `../../../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../../../"
 
 SPEC CHECKSUMS:
-  SnowplowTracker: b9831c59e7798affbd92c35ccd9c417e0736a589
+  SnowplowTracker: 9854cb3e19efff34c6773fcf9316d2a84ffa0347
 
 PODFILE CHECKSUM: 4fa6d34ad86cfb83e73ac07da949dd01722e155a
 
